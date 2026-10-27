@@ -12,9 +12,13 @@ const navigationItems = [
   { label: 'Contact', path: routePaths.contact },
 ]
 
-export function Header() {
+type HeaderProps = {
+  forceCompact?: boolean
+}
+
+export function Header({ forceCompact = false }: HeaderProps) {
   const headerReference = useRef<HTMLElement>(null)
-  const isHomePage = useMatch(routePaths.home) !== null
+  const isHomePage = useMatch(routePaths.home) !== null && !forceCompact
 
   useHeaderAnimation(headerReference, isHomePage)
 
