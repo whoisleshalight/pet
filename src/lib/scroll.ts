@@ -1,15 +1,20 @@
 import { ScrollSmoother } from './animation'
 
-export function scrollToTop() {
+export function scrollToPosition(top: number, smooth = true) {
   const scrollSmoother = ScrollSmoother.get()
-
-  if (scrollSmoother) {
-    scrollSmoother.scrollTo(0, true)
-    return
-  }
-
   const reduceMotion = window.matchMedia(
     '(prefers-reduced-motion: reduce)',
   ).matches
-  window.scrollTo({ top: 0, behavior: reduceMotion ? 'instant' : 'smooth' })
+  const shouldSmooth = smooth && !reduceMotion
+
+  if (scrollSmoother) {
+    scrollSmoother.scrollTo(top, shouldSmooth)
+    return
+  }
+
+  window.scrollTo({ top, behavior: shouldSmooth ? 'smooth' : 'instant' })
+}
+
+export function scrollToTop() {
+  scrollToPosition(0)
 }

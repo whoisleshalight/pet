@@ -7,6 +7,7 @@ import {
   useMatches,
 } from 'react-router'
 import { portfolio } from '../../../config/portfolio'
+import { Scrollbar } from '../../../components/scrollbar/Scrollbar'
 import { Header } from './header/Header'
 import type { HeaderVariant } from './header/Header'
 import { SmoothScroll } from './scroll/SmoothScroll'
@@ -53,6 +54,11 @@ export function SiteLayout() {
           <Outlet />
         </main>
       </SmoothScroll>
+      <Scrollbar
+        contentReference={mainContentReference}
+        navigationKey={location.key}
+        controlsId="main-content"
+      />
       <ScrollRestoration />
     </>
   )
