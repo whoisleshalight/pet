@@ -1,28 +1,39 @@
-import './HeaderIntroduction.scss'
+import styles from './HeaderIntroduction.module.scss'
+import type { RefObject } from 'react'
 import { Link } from 'react-router'
 import { routePaths } from '../../../router/routePaths'
 import { portfolio } from '../../../../config/portfolio'
 import { getAnimatedLetters } from './getAnimatedLetters'
 
-export function HeaderIntroduction() {
+type HeaderIntroductionProps = {
+  titleReference: RefObject<HTMLDivElement | null>
+  descriptionReference: RefObject<HTMLDivElement | null>
+  availabilityReference: RefObject<HTMLDivElement | null>
+}
+
+export function HeaderIntroduction({
+  titleReference,
+  descriptionReference,
+  availabilityReference,
+}: HeaderIntroductionProps) {
   return (
     <>
-      <div className="siteHeaderTitle">
+      <div ref={titleReference} className={styles.siteHeaderTitle}>
         <h1
-          className="siteHeaderName"
+          className={styles.siteHeaderName}
           aria-label={`${portfolio.firstName} ${portfolio.lastName}`}
         >
           {[portfolio.firstName, portfolio.lastName].map((name, nameIndex) => (
             <span
-              className="siteHeaderWordMask"
+              className={styles.siteHeaderWordMask}
               key={nameIndex}
               aria-hidden="true"
             >
-              <span className="siteHeaderWord">
+              <span className={styles.siteHeaderWord}>
                 {getAnimatedLetters(name).map((letter, letterIndex) => (
-                  <span className="siteHeaderLetter" key={letterIndex}>
-                    <span className="siteHeaderLetterContent">
-                      <span className="siteHeaderLetterReveal">{letter}</span>
+                  <span className={styles.siteHeaderLetter} key={letterIndex}>
+                    <span className={styles.siteHeaderLetterContent}>
+                      <span className={styles.siteHeaderLetterReveal}>{letter}</span>
                     </span>
                   </span>
                 ))}
@@ -31,18 +42,18 @@ export function HeaderIntroduction() {
           ))}
         </h1>
       </div>
-      <div className="siteHeaderDescription">
-        <p className="siteHeaderDescriptionContent">
+      <div ref={descriptionReference} className={styles.siteHeaderDescription}>
+        <p className={styles.siteHeaderDescriptionContent}>
           <span>{portfolio.role}</span>
           {portfolio.introduction.map((line) => (
             <span key={line}>{line}</span>
           ))}
         </p>
       </div>
-      <div className="siteHeaderAvailability">
-        <Link className="siteHeaderAvailabilityLink" to={routePaths.contact}>
+      <div ref={availabilityReference} className={styles.siteHeaderAvailability}>
+        <Link className={styles.siteHeaderAvailabilityLink} to={routePaths.contact}>
           {portfolio.availability}
-          <span className="siteHeaderAvailabilityDot" aria-hidden="true" />
+          <span className={styles.siteHeaderAvailabilityDot} aria-hidden="true" />
         </Link>
       </div>
     </>

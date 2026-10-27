@@ -1,4 +1,4 @@
-import './SiteLayout.scss'
+import styles from './SiteLayout.module.scss'
 import { useEffect, useRef } from 'react'
 import {
   Outlet,
@@ -7,10 +7,10 @@ import {
   useMatches,
 } from 'react-router'
 import { portfolio } from '../../../config/portfolio'
-import { Scrollbar } from '../../../components/scrollbar/Scrollbar'
-import { Header } from './header/Header'
-import type { HeaderVariant } from './header/Header'
-import { SmoothScroll } from './scroll/SmoothScroll'
+import { Scrollbar } from '../../../components/scrollbar'
+import { Header } from './header'
+import type { HeaderVariant } from './header'
+import { SmoothScroll } from './scroll'
 
 export function SiteLayout() {
   const location = useLocation()
@@ -46,7 +46,7 @@ export function SiteLayout() {
         navigationKey={location.key}
       >
         <main
-          className="siteMain"
+          className={styles.siteMain}
           id="main-content"
           ref={mainContentReference}
           tabIndex={-1}

@@ -1,7 +1,7 @@
-import './SmoothScroll.scss'
+import styles from './SmoothScroll.module.scss'
 import { useRef } from 'react'
 import type { ReactNode, RefObject } from 'react'
-import { useSmoothScroll } from './useSmoothScroll'
+import { useSmoothScroll } from './hooks/useSmoothScroll'
 
 type SmoothScrollProps = {
   children: ReactNode
@@ -19,7 +19,7 @@ export function SmoothScroll({
   useSmoothScroll(wrapperReference, contentReference, navigationKey)
 
   return (
-    <div className="smoothScrollWrapper" ref={wrapperReference}>
+    <div className={styles.smoothScrollWrapper} ref={wrapperReference}>
       {children}
     </div>
   )

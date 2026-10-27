@@ -1,7 +1,7 @@
-import './SiteLayout.scss'
+import styles from './SiteLayout.module.scss'
 import { useEffect, useRef } from 'react'
 import { RouteErrorPage } from '../../../pages/route-error/RouteErrorPage'
-import { Header } from './header/Header'
+import { Header } from './header'
 
 export function SiteErrorLayout() {
   const headerReference = useRef<HTMLElement>(null)
@@ -15,7 +15,7 @@ export function SiteErrorLayout() {
     <>
       <Header headerReference={headerReference} />
       <main
-        className="siteMain"
+        className={styles.siteMain}
         id="main-content"
         ref={mainContentReference}
         tabIndex={-1}

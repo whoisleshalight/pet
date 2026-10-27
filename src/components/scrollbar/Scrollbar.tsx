@@ -1,7 +1,7 @@
-import './Scrollbar.scss'
+import styles from './Scrollbar.module.scss'
 import { useRef } from 'react'
 import type { RefObject } from 'react'
-import { useScrollbar } from './useScrollbar'
+import { useScrollbar } from './hooks/useScrollbar'
 
 type ScrollbarProps = {
   contentReference: RefObject<HTMLElement | null>
@@ -23,7 +23,7 @@ export function Scrollbar({
 
   return (
     <div
-      className="scrollbar"
+      className={styles.scrollbar}
       ref={scrollbarReference}
       role="scrollbar"
       aria-label="Прокрутка сторінки"
@@ -37,7 +37,7 @@ export function Scrollbar({
       {...handlers}
     >
       {Array.from({ length: lineCount }, (_, index) => (
-        <span className="scrollbarLine" key={index} aria-hidden="true" />
+        <span className={styles.scrollbarLine} key={index} aria-hidden="true" />
       ))}
     </div>
   )

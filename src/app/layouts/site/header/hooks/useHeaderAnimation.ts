@@ -1,10 +1,12 @@
 import type { RefObject } from 'react'
-import { gsap, useGSAP } from '../../../../lib/animation'
+import { gsap, useGSAP } from '../../../../../lib/animation'
+import brandStyles from '../HeaderBrand.module.scss'
+import introductionStyles from '../HeaderIntroduction.module.scss'
 import {
   headerAnimationMediaQuery,
   introScrollDistance,
   introScrollSmoothingDuration,
-} from './headerAnimationSettings'
+} from '../headerAnimationSettings'
 
 const brandLetterEasings = [
   'power1.inOut',
@@ -16,23 +18,55 @@ const brandLetterEasings = [
 const headerTransitionDuration = 1.5
 const brandRevealStart = 0.5
 
-export function useHeaderAnimation(
-  headerReference: RefObject<HTMLElement | null>,
-  isHeaderExpanded: boolean,
-) {
+type HeaderAnimationOptions = {
+  headerReference: RefObject<HTMLElement | null>
+  navigationReference: RefObject<HTMLElement | null>
+  brandTextReference: RefObject<HTMLSpanElement | null>
+  titleReference: RefObject<HTMLDivElement | null>
+  descriptionReference: RefObject<HTMLDivElement | null>
+  availabilityReference: RefObject<HTMLDivElement | null>
+  isHeaderExpanded: boolean
+}
+
+export function useHeaderAnimation({
+  headerReference,
+  navigationReference,
+  brandTextReference,
+  titleReference,
+  descriptionReference,
+  availabilityReference,
+  isHeaderExpanded,
+}: HeaderAnimationOptions) {
   useGSAP(
     () => {
       const header = headerReference.current
-      if (!header || !isHeaderExpanded) return
+      const navigation = navigationReference.current
+      const brandText = brandTextReference.current
+      const title = titleReference.current
+      const description = descriptionReference.current
+      const availability = availabilityReference.current
+      if (
+        !isHeaderExpanded ||
+        !header ||
+        !navigation ||
+        !brandText ||
+        !title ||
+        !description ||
+        !availability
+      ) return
 
       const mediaQueries = gsap.matchMedia()
       mediaQueries.add(headerAnimationMediaQuery, () => {
+        const select = gsap.utils.selector(header)
+        const words = gsap.utils.toArray<HTMLElement>(
+          `.${introductionStyles.siteHeaderWord}`,
+          title,
+        )
         const entrance = gsap.timeline()
-        const words = gsap.utils.toArray<HTMLElement>('.siteHeaderWord')
 
         words.forEach((word, wordIndex) => {
           entrance.fromTo(
-            word.querySelectorAll('.siteHeaderLetterReveal'),
+            gsap.utils.selector(word)(`.${introductionStyles.siteHeaderLetterReveal}`),
             { yPercent: 120, rotation: 6, transformOrigin: '0% 100%' },
             {
               yPercent: 0,
@@ -49,7 +83,7 @@ export function useHeaderAnimation(
         })
 
         entrance.from(
-          '.siteHeaderDescriptionContent, .siteHeaderAvailabilityLink',
+          select(`.${introductionStyles.siteHeaderDescriptionContent}, .${introductionStyles.siteHeaderAvailabilityLink}`),
           {
             opacity: 0,
             y: 16,
@@ -60,9 +94,14 @@ export function useHeaderAnimation(
           0.4,
         )
 
-        // The complete header follows one timeline outside ScrollSmoother's transform.
+        // Keep the grid stable; only transforms and opacity follow the scroll.
         const transition = gsap.timeline({
+          defaults: {
+            duration: headerTransitionDuration,
+            ease: 'power1.inOut',
+          },
           scrollTrigger: {
+            trigger: header,
             start: 0,
             end: introScrollDistance,
             scrub: introScrollSmoothingDuration,
@@ -70,33 +109,12 @@ export function useHeaderAnimation(
           },
         })
 
-        transition.to(
-          '.siteHeaderTitle',
-          {
-            height: '1.2em',
-            duration: headerTransitionDuration,
-            ease: 'power1.inOut',
-          },
-          0,
-        )
-
-        transition.to(
-          header,
-          {
-            rowGap: 0,
-            duration: headerTransitionDuration,
-            ease: 'power1.inOut',
-          },
-          0,
-        )
-
         words.forEach((word, wordIndex) => {
           transition.to(
-            word.querySelectorAll('.siteHeaderLetterContent'),
+            gsap.utils.selector(word)(`.${introductionStyles.siteHeaderLetterContent}`),
             {
               yPercent: -115,
               duration: 1.05,
-              ease: 'power1.inOut',
               stagger: {
                 amount: 0.4,
                 from: wordIndex === 0 ? 'start' : 'end',
@@ -107,33 +125,28 @@ export function useHeaderAnimation(
         })
 
         transition.to(
-          '.siteHeaderDescription, .siteHeaderAvailability',
+          [description, availability],
           {
             autoAlpha: 0,
-            height: 0,
-            duration: headerTransitionDuration,
-            ease: 'power1.inOut',
+            y: () => brandText.offsetHeight - title.offsetHeight -
+              parseFloat(getComputedStyle(header).rowGap),
           },
           0,
         )
 
         transition.to(
-          '.siteHeaderNavigation',
-          {
-            y: 0,
-            duration: headerTransitionDuration,
-            ease: 'power1.inOut',
-          },
+          navigation,
+          { y: () => navigation.offsetHeight - title.offsetHeight },
           0,
         )
 
-        gsap.set('.siteHeaderBrandText', { autoAlpha: 1 })
+        gsap.set(brandText, { autoAlpha: 1 })
         gsap.utils
-          .toArray<HTMLElement>('.siteHeaderBrandLetterContent')
+          .toArray<HTMLElement>(`.${brandStyles.siteHeaderBrandLetterContent}`, brandText)
           .forEach((letter, letterIndex) => {
             transition.fromTo(
               letter,
-              { yPercent: 300  },
+              { yPercent: 300 },
               {
                 yPercent: 0,
                 duration: headerTransitionDuration - brandRevealStart,
@@ -144,7 +157,7 @@ export function useHeaderAnimation(
               brandRevealStart,
             )
           })
-      })
+      }, header)
 
       return () => mediaQueries.revert()
     },

@@ -27,11 +27,11 @@
   display: block;
 }
 
-.siteHeaderExpanded .siteHeaderBrand {
+.siteHeaderBrandExpanded {
   grid-area: title;
   z-index: 1;
 }
-.siteHeaderExpanded .siteHeaderBrandText {
+.siteHeaderBrandExpanded .siteHeaderBrandText {
   visibility: hidden;
 }
 
@@ -45,7 +45,7 @@
 }
 
 @media (max-width: $tabletBreakpoint) {
-  .siteHeaderExpanded .siteHeaderBrand {
+  .siteHeaderBrandExpanded {
     display: none;
   }
 }
@@ -57,7 +57,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .siteHeaderExpanded .siteHeaderBrand {
+  .siteHeaderBrandExpanded {
     display: none;
   }
 }

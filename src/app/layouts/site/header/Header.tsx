@@ -1,10 +1,11 @@
-import './Header.scss'
+import styles from './Header.module.scss'
+import { useRef } from 'react'
 import type { RefObject } from 'react'
 import { NavLink } from 'react-router'
 import { routePaths } from '../../../router/routePaths'
 import { HeaderBrand } from './HeaderBrand'
 import { HeaderIntroduction } from './HeaderIntroduction'
-import { useHeaderAnimation } from './useHeaderAnimation'
+import { useHeaderAnimation } from './hooks/useHeaderAnimation'
 
 const navigationItems = [
   { label: 'About', path: routePaths.about },
@@ -20,18 +21,44 @@ type HeaderProps = {
 
 export function Header({ headerReference, variant = 'compact' }: HeaderProps) {
   const isHeaderExpanded = variant === 'expanded'
+  const navigationReference = useRef<HTMLElement>(null)
+  const brandTextReference = useRef<HTMLSpanElement>(null)
+  const titleReference = useRef<HTMLDivElement>(null)
+  const descriptionReference = useRef<HTMLDivElement>(null)
+  const availabilityReference = useRef<HTMLDivElement>(null)
 
-  useHeaderAnimation(headerReference, isHeaderExpanded)
+  useHeaderAnimation({
+    headerReference,
+    navigationReference,
+    brandTextReference,
+    titleReference,
+    descriptionReference,
+    availabilityReference,
+    isHeaderExpanded,
+  })
 
   return (
     <header
       ref={headerReference}
-      className={`siteHeader${isHeaderExpanded ? ' siteHeaderExpanded' : ''}`}
+      className={`${styles.siteHeader}${isHeaderExpanded ? ` ${styles.siteHeaderExpanded}` : ''}`}
     >
-      <HeaderBrand isExpanded={isHeaderExpanded} />
-      {isHeaderExpanded && <HeaderIntroduction />}
-      <nav className="siteHeaderNavigation" aria-label="Main navigation">
-        <ul className="siteHeaderLinks">
+      <HeaderBrand
+        isExpanded={isHeaderExpanded}
+        textReference={brandTextReference}
+      />
+      {isHeaderExpanded && (
+        <HeaderIntroduction
+          titleReference={titleReference}
+          descriptionReference={descriptionReference}
+          availabilityReference={availabilityReference}
+        />
+      )}
+      <nav
+        ref={navigationReference}
+        className={styles.siteHeaderNavigation}
+        aria-label="Main navigation"
+      >
+        <ul className={styles.siteHeaderLinks}>
           {navigationItems.map((navigationItem) => (
             <li key={navigationItem.path}>
               <NavLink to={navigationItem.path} className="textLink">

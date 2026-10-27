@@ -4,7 +4,7 @@ import {
   useGSAP,
   ScrollSmoother,
   ScrollTrigger,
-} from '../../../../lib/animation'
+} from '../../../../../lib/animation'
 
 export function useSmoothScroll(
   wrapperReference: RefObject<HTMLDivElement | null>,
@@ -37,23 +37,30 @@ export function useSmoothScroll(
 
         return () => scrollSmoother.kill()
       },
+      wrapper,
     )
 
     return () => mediaQueries.revert()
-  })
+  }, { scope: wrapperReference })
 
   useGSAP(
-    () => {
+    (_context, contextSafe) => {
+      if (!contextSafe) return
+
       // Update the page height before ScrollRestoration restores a saved position.
       ScrollTrigger.refresh()
 
       // Apply that position immediately after the router has restored it.
-      const refreshFrame = requestAnimationFrame(() => {
+      const refreshFrame = requestAnimationFrame(contextSafe(() => {
         ScrollSmoother.get()?.scrollTo(window.scrollY, false)
-      })
+      }))
 
       return () => cancelAnimationFrame(refreshFrame)
     },
-    { dependencies: [navigationKey], revertOnUpdate: true },
+    {
+      scope: wrapperReference,
+      dependencies: [navigationKey],
+      revertOnUpdate: true,
+    },
   )
 }

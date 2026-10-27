@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import type { KeyboardEvent, PointerEvent, RefObject } from 'react'
-import { gsap, ScrollSmoother, ScrollTrigger } from '../../lib/animation'
-import { scrollToPosition } from '../../lib/scroll'
-import { scrollbarSettings } from './scrollbarSettings'
+import { gsap, useGSAP, ScrollSmoother, ScrollTrigger } from '../../../lib/animation'
+import { scrollToPosition } from '../../../lib/scroll'
+import { scrollbarSettings } from '../scrollbarSettings'
 
 const clamp = (value: number, min: number, max: number) =>
   Math.min(max, Math.max(min, value))
@@ -23,7 +23,7 @@ export function useScrollbar(
     isDragging: boolean
   } | null>(null)
 
-  useEffect(() => {
+  const { contextSafe } = useGSAP(() => {
     const scrollbar = scrollbarReference.current
     const content = contentReference.current
     if (!scrollbar || !content) return
@@ -113,7 +113,13 @@ export function useScrollbar(
       pointerReference.current = null
       scrollbar.removeAttribute('data-dragging')
     }
-  }, [scrollbarReference, contentReference, navigationKey])
+  }, {
+    scope: scrollbarReference,
+    dependencies: [scrollbarReference, contentReference, navigationKey],
+    revertOnUpdate: true,
+  })
+
+  const scroll = contextSafe(scrollToPosition)
 
   const scrollFromPointer = (
     event: PointerEvent<HTMLDivElement>,
@@ -128,7 +134,7 @@ export function useScrollbar(
       0,
       1,
     )
-    scrollToPosition(progress * metricsReference.current.maxScroll, smooth)
+    scroll(progress * metricsReference.current.maxScroll, smooth)
   }
 
   const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
@@ -185,7 +191,7 @@ export function useScrollbar(
     const destination = destinations[event.key]
     if (destination === undefined) return
     event.preventDefault()
-    scrollToPosition(clamp(destination, 0, maxScroll))
+    scroll(clamp(destination, 0, maxScroll))
   }
 
   return {

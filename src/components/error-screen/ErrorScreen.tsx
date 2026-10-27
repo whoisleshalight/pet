@@ -1,4 +1,4 @@
-import './ErrorScreen.scss'
+import styles from './ErrorScreen.module.scss'
 import { useId } from 'react'
 import { Link } from 'react-router'
 import { routePaths } from '../../app/router/routePaths'
@@ -19,18 +19,18 @@ export function ErrorScreen({
 
   return (
     <section
-      className="errorScreen"
+      className={styles.errorScreen}
       aria-labelledby={titleIdentifier}
       aria-describedby={messageIdentifier}
     >
-      <div className="errorScreenContent">
-        <h1 className="errorScreenStatusCode" id={titleIdentifier}>
+      <div className={styles.errorScreenContent}>
+        <h1 className={styles.errorScreenStatusCode} id={titleIdentifier}>
           {statusCode}
         </h1>
         <p id={messageIdentifier}>{message}</p>
         <div>
           <Link
-            className="errorScreenHomeLink"
+            className={styles.errorScreenHomeLink}
             to={routePaths.home}
             reloadDocument={reloadDocument}
           >
