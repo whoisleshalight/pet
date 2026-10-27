@@ -1,0 +1,77 @@
+@use '../../../../styles/variables' as *;
+
+.siteHeader {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas: 'brand navigation';
+  align-items: start;
+  column-gap: $pageGutter;
+  padding: $pageMargin;
+  pointer-events: none;
+}
+
+.siteHeader a {
+  pointer-events: auto;
+}
+
+.siteHeaderNavigation {
+  grid-area: navigation;
+  justify-self: end;
+  font-size: 18px;
+  line-height: 1.2;
+}
+.siteHeaderLinks {
+  display: flex;
+  gap: 1em;
+  list-style: none;
+}
+.siteHeaderLinks li:not(:last-child)::after {
+  content: ',';
+}
+.siteHeaderLinks a {
+  font-size: inherit;
+  font-weight: 500;
+}
+.siteHeaderLinks a[aria-current='page'] {
+  background-size: 100% 1px;
+}
+
+.siteHeaderExpanded {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-areas:
+    'title title title title title title title title title title title title'
+    'description description description description description description availability availability availability . . .';
+  row-gap: $pageGutter;
+}
+
+.siteHeaderExpanded .siteHeaderNavigation {
+  grid-area: title;
+  align-self: end;
+  transform: translateY(calc(100% + #{$pageGutter}));
+}
+
+@media (max-width: $tabletBreakpoint) {
+  .siteHeaderExpanded {
+    position: static;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      'title title'
+      'availability navigation'
+      'description description';
+  }
+
+  .siteHeaderExpanded .siteHeaderNavigation {
+    grid-area: navigation;
+    align-self: start;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .siteHeaderExpanded {
+    position: static;
+  }
+}

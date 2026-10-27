@@ -1,0 +1,33 @@
+@use 'variables' as *;
+
+@mixin contentPage {
+  min-height: 100svh;
+  padding: clamp(130px, 15vw, 240px) $pageMargin 80px;
+
+  h1 {
+    max-width: 1200px;
+    margin: 32px 0;
+    font-size: clamp(48px, 8.5vw, 144px);
+    font-weight: 500;
+    line-height: 0.95;
+    letter-spacing: -0.05em;
+  }
+}
+
+@mixin pageLabel {
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+@mixin pageDescription {
+  max-width: 560px;
+  margin: 0 0 36px;
+  font-size: clamp(18px, 2vw, 24px);
+  line-height: 1.45;
+}
+
+@mixin pageLink {
+  font-size: clamp(18px, 2.5vw, 32px);
+  overflow-wrap: anywhere;
+}

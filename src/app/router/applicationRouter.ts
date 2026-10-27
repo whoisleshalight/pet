@@ -1,17 +1,17 @@
 import { createBrowserRouter } from 'react-router'
-import { SiteLayout } from '../layouts/SiteLayout'
-import { RouteErrorPage } from '../../pages/route-error/RouteErrorPage'
+import { SiteLayout } from '../layouts/site/SiteLayout'
+import { SiteErrorLayout } from '../layouts/site/SiteErrorLayout'
 import { routePaths } from './routePaths'
 
 // The layout persists between pages. Each page loads its JavaScript on demand.
 export const applicationRouter = createBrowserRouter([
   {
     Component: SiteLayout,
-    ErrorBoundary: RouteErrorPage,
+    ErrorBoundary: SiteErrorLayout,
     children: [
       {
         index: true,
-        handle: { title: 'Home' },
+        handle: { title: 'Home', headerVariant: 'expanded' },
         lazy: async () => {
           const { HomePage } = await import('../../pages/home/HomePage')
           return { Component: HomePage }

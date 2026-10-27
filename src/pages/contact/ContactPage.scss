@@ -1,0 +1,24 @@
+@use '../../styles/mixins' as *;
+@use '../../styles/variables' as *;
+
+.contactPage {
+  @include contentPage;
+}
+.contactPageLabel {
+  @include pageLabel;
+}
+.contactPageDescription {
+  @include pageDescription;
+}
+.contactPageLink {
+  @include pageLink;
+}
+
+.contactPageStatusDot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-left: 4px;
+  border-radius: 50%;
+  background: $colorAvailable;
+}

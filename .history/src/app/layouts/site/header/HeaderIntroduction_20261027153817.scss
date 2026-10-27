@@ -1,0 +1,99 @@
+@use '../../../../styles/variables' as *;
+
+.siteHeaderTitle {
+	grid-area: title;
+	min-width: 0;
+	min-height: 0;
+	overflow: hidden;
+}
+
+.siteHeaderName {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: $pageGutter;
+	font-size: calc(9.5vw - 4px);
+	font-weight: 700;
+	line-height: 0.9;
+	text-transform: uppercase;
+}
+
+.siteHeaderWordMask,
+.siteHeaderLetter {
+	display: block;
+	overflow: hidden;
+}
+
+.siteHeaderWord {
+	display: flex;
+}
+
+.siteHeaderLetterContent,
+.siteHeaderLetterReveal {
+	display: block;
+}
+
+.siteHeaderDescription {
+	grid-area: description;
+	min-height: 0;
+	overflow: hidden;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 1.4375;
+	text-transform: uppercase;
+}
+
+.siteHeaderDescriptionContent span {
+	display: block;
+}
+
+.siteHeaderAvailability {
+	grid-area: availability;
+	min-height: 0;
+	overflow: hidden;
+}
+
+.siteHeaderAvailabilityLink {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	padding: 2px 8px;
+	border: 1px solid $colorInk;
+	border-radius: 50px;
+	background: $colorInk;
+	color: $colorPaper;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 1.57;
+	text-decoration: none;
+	text-transform: uppercase;
+	transition:
+		color 200ms,
+		background-color 200ms;
+}
+
+.siteHeaderAvailabilityLink:hover {
+	color: $colorInk;
+	background-color: $colorPaper;
+}
+
+.siteHeaderAvailabilityLink:focus-visible {
+	outline-offset: -3px;
+}
+
+.siteHeaderAvailabilityDot {
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: $colorAvailable;
+}
+
+@media (max-width: $mobileBreakpoint) {
+	.siteHeaderDescription {
+		font-size: 14px;
+	}
+
+	.siteHeaderAvailabilityLink {
+		font-size: 13px;
+	}
+}

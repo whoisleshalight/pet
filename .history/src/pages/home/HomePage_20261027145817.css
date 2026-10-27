@@ -1,0 +1,10 @@
+.homePlaceholder {
+
+	height: 200vh;
+
+}
+
+.homePlaceholder h2 {
+	font-size: clamp(24px, 4vw, 56px);
+	font-weight: 500;
+}

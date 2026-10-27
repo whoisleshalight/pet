@@ -1,0 +1,63 @@
+@use '../../../../styles/variables' as *;
+
+.siteHeaderBrand {
+  grid-area: brand;
+  justify-self: start;
+  align-self: start;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.siteHeaderBrandText {
+  display: flex;
+  white-space: nowrap;
+}
+.siteHeaderBrandLetter {
+  display: block;
+  flex: 0 0 auto;
+  overflow: hidden;
+}
+.siteHeaderBrandLetterContent {
+  display: block;
+}
+
+.siteHeaderExpanded .siteHeaderBrand {
+  grid-area: title;
+  z-index: 1;
+}
+.siteHeaderExpanded .siteHeaderBrandText {
+  visibility: hidden;
+}
+
+.siteHeaderBrand:focus-visible .siteHeaderBrandText {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.siteHeaderBrand:focus-visible .siteHeaderBrandLetterContent {
+  transform: none !important;
+}
+
+@media (max-width: $tabletBreakpoint) {
+  .siteHeaderExpanded .siteHeaderBrand {
+    display: none;
+  }
+}
+
+@media (max-width: $mobileBreakpoint) {
+  .siteHeaderBrand {
+    font-size: clamp(12px, 4vw, 18px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .siteHeaderExpanded .siteHeaderBrand {
+    display: none;
+  }
+}

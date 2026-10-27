@@ -1,0 +1,14 @@
+@use '../../styles/mixins' as *;
+
+.aboutPage {
+  @include contentPage;
+}
+.aboutPageLabel {
+  @include pageLabel;
+}
+.aboutPageDescription {
+  @include pageDescription;
+}
+.aboutPageLink {
+  @include pageLink;
+}
