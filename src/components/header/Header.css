@@ -1,0 +1,85 @@
+.site-header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 17px var(--page-margin);
+  pointer-events: none;
+}
+
+.site-header a {
+  pointer-events: auto;
+}
+
+.site-header__brand {
+  position: absolute;
+  top: 17px;
+  left: var(--page-margin);
+  overflow: hidden;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.site-header__brand-text {
+  display: block;
+}
+.site-header__navigation {
+  margin-left: auto;
+}
+.site-header__links {
+  display: flex;
+  list-style: none;
+}
+.site-header__links li:not(:last-child) {
+  margin-right: 1em;
+}
+.site-header__links li:not(:last-child)::after {
+  content: ',';
+}
+.site-header__links a {
+  font-size: 18px;
+  font-weight: 500;
+}
+.site-header__links a[aria-current='page'] {
+  background-size: 100% 1px;
+}
+.site-header--home {
+  padding-top: 10vw;
+}
+.site-header--home .site-header__brand-text {
+  visibility: hidden;
+}
+
+/* Home remains available to keyboard users before the scroll transition. */
+.site-header__brand:focus-visible .site-header__brand-text {
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+@media (max-width: 1024px) {
+  .site-header--home {
+    position: absolute;
+    padding-top: 11vw;
+  }
+  .site-header--home .site-header__brand {
+    display: none;
+  }
+}
+
+@media (max-width: 660px) {
+  .site-header--home {
+    padding-top: 12vw;
+  }
+}
+
+@media (max-width: 500px) {
+  .site-header--home {
+    padding-top: 14vw;
+  }
+}
