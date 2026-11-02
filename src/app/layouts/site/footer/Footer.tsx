@@ -10,7 +10,7 @@ export function Footer() {
                     </a>
                     <ul>
                         <li>
-                            <a href="#">UpWork</a>
+                            <a href="#">UpWork1</a>
                         </li>
                         <li>
                             <a href="#">Fiver</a>
