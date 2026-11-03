@@ -29,10 +29,6 @@ export function Partners() {
           <h2 id={headingId} className={styles.title}>
             Our Partners
           </h2>
-          <p className={styles.description}>
-            Here are some of the brands we’ve had the privilege to collaborate
-            with.
-          </p>
         </div>
 
         <div className={styles.logoStage}>

@@ -1,63 +1,66 @@
 @use '../../../../styles/variables' as *;
 
 .siteHeaderBrand {
-  grid-area: brand;
-  justify-self: start;
-  align-self: start;
-  min-width: 0;
-  max-width: 100%;
-  overflow: hidden;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1.2;
-  text-decoration: none;
-  text-transform: uppercase;
+	grid-area: brand;
+	justify-self: start;
+	align-self: start;
+	min-width: 0;
+	max-width: 100%;
+	overflow: hidden;
+	font-size: 24px;
+	font-weight: 700;
+	line-height: 1.2;
+	text-decoration: none;
+	text-transform: uppercase;
 }
 
 .siteHeaderBrandText {
-  display: flex;
-  white-space: nowrap;
+	display: flex;
+	white-space: nowrap;
 }
+
 .siteHeaderBrandLetter {
-  display: block;
-  flex: 0 0 auto;
-  overflow: hidden;
+	display: block;
+	flex: 0 0 auto;
+	overflow: hidden;
 }
+
 .siteHeaderBrandLetterContent {
-  display: block;
+	display: block;
 }
 
 .siteHeaderBrandExpanded {
-  grid-area: title;
-  z-index: 1;
+	grid-area: title;
+	z-index: 1;
 }
+
 .siteHeaderBrandExpanded .siteHeaderBrandText {
-  visibility: hidden;
+	visibility: hidden;
 }
 
 .siteHeaderBrand:focus-visible .siteHeaderBrandText {
-  visibility: visible !important;
-  opacity: 1 !important;
+	visibility: visible !important;
+	opacity: 1 !important;
 }
 
 .siteHeaderBrand:focus-visible .siteHeaderBrandLetterContent {
-  transform: none !important;
+	transform: none !important;
 }
 
 @media (max-width: $tabletBreakpoint) {
-  .siteHeaderBrandExpanded {
-    display: none;
-  }
+	.siteHeaderBrandExpanded {
+		display: none;
+	}
 }
 
 @media (max-width: $mobileBreakpoint) {
-  .siteHeaderBrand {
-    font-size: clamp(12px, 4vw, 18px);
-  }
+	.siteHeaderBrand {
+		font-size: clamp(12px, 4vw, 18px);
+	}
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .siteHeaderBrandExpanded {
-    display: none;
-  }
+	.siteHeaderBrandExpanded {
+		display: none;
+	}
 }

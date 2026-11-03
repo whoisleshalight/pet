@@ -2,6 +2,7 @@
 
 .partners {
 	isolation: isolate;
+	padding-top: 0;
 }
 
 .sequence {
@@ -21,15 +22,6 @@
 	font-weight: 700;
 	line-height: 1;
 	letter-spacing: -0.05em;
-	text-align: center;
-}
-
-.description {
-	max-inline-size: 240px;
-	color: #757575;
-	font-size: 14px;
-	font-weight: 500;
-	line-height: 1.7;
 	text-align: center;
 }
 
@@ -108,13 +100,6 @@
 		translate: 0 50%;
 	}
 
-	.description {
-		grid-row: 3;
-		align-self: end;
-		justify-self: start;
-		text-align: start;
-	}
-
 	.logoStage {
 		position: relative;
 		z-index: 1;
@@ -129,7 +114,8 @@
 	}
 
 	.imageFrame {
-		block-size: 100vh;
+		block-size: 80vh;
+		border-radius: 40px;
 		margin-block-start: 0;
 	}
 }
@@ -163,12 +149,6 @@
 		letter-spacing: -0.04em;
 	}
 
-	.description {
-		justify-self: start;
-		max-inline-size: none;
-		text-align: start;
-	}
-
 	.logoGrid {
 		grid-template-columns: repeat(3, minmax(0, 1fr));
 	}
@@ -184,11 +164,9 @@
 
 @media (max-width: $mobileBreakpoint) {
 	.title {
-		font-size: clamp(
-			32px,
-			calc((100vw - 2 * var(--container-padding-inline)) * 0.23),
-			64px
-		);
+		font-size: clamp(32px,
+				calc((100vw - 2 * var(--container-padding-inline)) * 0.23),
+				64px);
 		letter-spacing: -0.04em;
 	}
 

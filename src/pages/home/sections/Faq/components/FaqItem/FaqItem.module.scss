@@ -1,0 +1,130 @@
+.item {
+  min-inline-size: 0;
+}
+
+.heading {
+  font-size: clamp(40px, 3.333vw, 64px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.045em;
+}
+
+.trigger {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 6fr);
+  align-items: start;
+  inline-size: 100%;
+  font-weight: inherit;
+  text-align: start;
+
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 8px;
+  }
+
+  &:hover .question {
+    color: #646464;
+  }
+
+  &[aria-expanded='true'] .icon {
+    transform: rotate(135deg);
+  }
+}
+
+.icon {
+  position: relative;
+  justify-self: center;
+  inline-size: 24px;
+  block-size: 24px;
+  margin-block-start: 0.35em;
+  transition: transform 450ms ease;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: 50%;
+    background-color: currentColor;
+    transform: translate(-50%, -50%);
+  }
+
+  &::before {
+    inline-size: 100%;
+    block-size: 2px;
+  }
+
+  &::after {
+    inline-size: 2px;
+    block-size: 100%;
+  }
+}
+
+.question {
+  min-inline-size: 0;
+  padding-inline: 20px;
+  transition: color 200ms ease;
+}
+
+.answer {
+  height: 0;
+  padding-inline: calc(100% / 7 + 20px) 20px;
+  overflow: hidden;
+}
+
+.answerText {
+  max-inline-size: 480px;
+  padding-block-start: 16px;
+  color: #555;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+@media (max-width: 1199px) {
+  .heading {
+    font-size: clamp(32px, 4.84vw, 48px);
+  }
+
+  .trigger {
+    grid-template-columns: minmax(0, 1fr) 44px;
+  }
+
+  .icon {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .question {
+    grid-column: 1;
+    grid-row: 1;
+    padding-inline: 0 20px;
+  }
+
+  .answer {
+    padding-inline: 0 44px;
+  }
+}
+
+@media (max-width: 479px) {
+  .heading {
+    font-size: clamp(30px, 9.23vw, 36px);
+  }
+
+  .trigger {
+    grid-template-columns: minmax(0, 1fr) 32px;
+  }
+
+  .icon {
+    inline-size: 20px;
+    block-size: 20px;
+  }
+
+  .question {
+    padding-inline-end: 12px;
+  }
+
+  .answer {
+    padding-inline-end: 32px;
+  }
+}

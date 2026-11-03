@@ -1,0 +1,157 @@
+@use '../../../../styles/variables' as *;
+
+.faq {
+  padding-block: 0;
+}
+
+.layout {
+  --container-padding-inline: 40px;
+
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+}
+
+.introduction {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 80px;
+  block-size: 100svh;
+  min-block-size: 560px;
+  padding-block: clamp(160px, 16.67vw, 240px) 40px;
+  padding-inline-end: 40px;
+}
+
+.title {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: -0.03em;
+}
+
+.about {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.description {
+  max-inline-size: 300px;
+  color: #757575;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.7;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  inline-size: fit-content;
+  padding-block: 4px;
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.03em;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 6px;
+  transition: text-decoration-color 200ms ease;
+
+  &:hover {
+    text-decoration-color: currentColor;
+  }
+
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 6px;
+  }
+}
+
+.arrow {
+  flex-shrink: 0;
+  inline-size: 24px;
+  block-size: 24px;
+}
+
+.content {
+  min-inline-size: 0;
+  padding-block: clamp(160px, 16.67vw, 240px) 40px;
+}
+
+.questions {
+  display: flex;
+  flex-direction: column;
+  gap: 120px;
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  margin-block-start: 160px;
+  padding-inline: calc(100% / 7 + 20px) 20px;
+}
+
+.contactDescription {
+  max-inline-size: 320px;
+  color: #757575;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.7;
+}
+
+@media (min-width: 1200px) and (prefers-reduced-motion: reduce) {
+  .introduction {
+    position: sticky;
+    inset-block-start: 0;
+  }
+}
+
+@media (max-width: 1199px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 80px;
+    padding-block: 100px 64px;
+  }
+
+  .introduction {
+    block-size: auto;
+    min-block-size: 0;
+    gap: 32px;
+    padding: 0;
+  }
+
+  .about {
+    gap: 20px;
+  }
+
+  .content {
+    padding: 0;
+  }
+
+  .questions {
+    gap: 64px;
+  }
+
+  .contact {
+    margin-block-start: 80px;
+    padding-inline: 0;
+  }
+}
+
+@media (max-width: $mobileBreakpoint) {
+  .layout {
+    --container-padding-inline: 20px;
+
+    gap: 64px;
+  }
+
+  .title,
+  .link {
+    font-size: 24px;
+  }
+}

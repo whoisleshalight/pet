@@ -1,8 +1,0 @@
-@use '../../styles/variables' as *;
-
-@media (min-width: #{$tabletBreakpoint + 1px}) and (prefers-reduced-motion: no-preference) {
-  .homePage {
-    // Leave room for the existing expanded header before the first section.
-    padding-block-start: 100svh;
-  }
-}
