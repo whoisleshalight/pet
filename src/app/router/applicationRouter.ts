@@ -26,6 +26,38 @@ export const applicationRouter = createBrowserRouter([
         },
       },
       {
+        path: routePaths.news,
+        handle: { title: 'News' },
+        lazy: async () => {
+          const { NewsPage } = await import('../../pages/news/NewsPage')
+          return { Component: NewsPage }
+        },
+      },
+      {
+        path: routePaths.article,
+        handle: { title: 'Article' },
+        lazy: async () => {
+          const { ArticlePage } = await import('../../pages/article/ArticlePage')
+          return { Component: ArticlePage }
+        },
+      },
+      {
+        path: routePaths.projects,
+        handle: { title: 'Projects' },
+        lazy: async () => {
+          const { ProjectsPage } = await import('../../pages/projects/ProjectsPage')
+          return { Component: ProjectsPage }
+        },
+      },
+      {
+        path: routePaths.project,
+        handle: { title: 'Project' },
+        lazy: async () => {
+          const { ProjectPage } = await import('../../pages/project/ProjectPage')
+          return { Component: ProjectPage }
+        },
+      },
+      {
         path: routePaths.contact,
         handle: { title: 'Contact' },
         lazy: async () => {

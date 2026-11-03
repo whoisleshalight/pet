@@ -11,7 +11,9 @@ import styles from './Footer.module.scss'
 const currentYear = new Date().getFullYear()
 const navigationLinks = [
   { label: 'Home', path: routePaths.home },
+  { label: 'Projects', path: routePaths.projects },
   { label: 'About', path: routePaths.about },
+  { label: 'News', path: routePaths.news },
   { label: 'Contact', path: routePaths.contact },
 ]
 const socialLinks = ['Upwork', 'Fiverr', 'WhatsApp', 'Telegram']

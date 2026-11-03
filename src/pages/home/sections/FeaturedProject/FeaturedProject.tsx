@@ -1,4 +1,6 @@
 import { useId, useRef, useState } from 'react'
+import { Link } from 'react-router'
+import { routePaths } from '../../../../app/router/routePaths'
 import { Section } from '../../../../components/ui/Section'
 import { useFeaturedProjectParallax } from './hooks/useFeaturedProjectParallax'
 import projectImage from './assets/B4jxrHJqCYeKMdfyNVrqx2Gp4.avif'
@@ -60,11 +62,11 @@ export function FeaturedProject() {
         })}
       </div>
 
-      <a
+      <Link
         ref={cardReference}
         className={styles.projectCard}
-        href="https://mobius.framer.website/work/golden-hour"
-        aria-label="Golden Hour — view project on Möbius"
+        to={`${routePaths.projects}/golden-hour`}
+        aria-label="Golden Hour — view project"
       >
         <div ref={mediaReference} className={styles.projectMedia}>
           <img
@@ -81,7 +83,7 @@ export function FeaturedProject() {
         <div className={styles.projectCaption} aria-hidden="true">
           <span className={styles.projectName}>Golden Hour</span>
         </div>
-      </a>
+      </Link>
 
       <button
         className={styles.motionButton}

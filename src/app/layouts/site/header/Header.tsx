@@ -8,7 +8,9 @@ import { HeaderIntroduction } from './HeaderIntroduction'
 import { useHeaderAnimation } from './hooks/useHeaderAnimation'
 
 const navigationItems = [
+  { label: 'Projects', path: routePaths.projects },
   { label: 'About', path: routePaths.about },
+  { label: 'News', path: routePaths.news },
   { label: 'Contact', path: routePaths.contact },
 ]
 

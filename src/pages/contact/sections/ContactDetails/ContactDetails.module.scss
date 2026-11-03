@@ -1,0 +1,158 @@
+@use '../../../../styles/variables' as *;
+
+.contactDetails {
+  padding: 160px 40px 0;
+  color: $colorInk;
+  background: $colorPaper;
+}
+
+.visuallyHidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  padding: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+.scene {
+  position: relative;
+  min-inline-size: 0;
+}
+
+.imageFrame {
+  position: relative;
+  block-size: 100svh;
+  overflow: hidden;
+  background: #d9d6c9;
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.contactCard {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-end: 8.333%;
+  inline-size: 40%;
+  padding: 56px;
+  transform: translateY(-50%);
+  background: $colorPaper;
+}
+
+.contactList {
+  display: grid;
+  gap: 56px;
+}
+
+.contactGroup {
+  display: grid;
+  min-inline-size: 0;
+  gap: 16px;
+}
+
+.label {
+  color: #767676;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.7;
+  text-transform: uppercase;
+}
+
+.value {
+  min-inline-size: 0;
+  font-size: clamp(24px, 2.23vw, 32px);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.025em;
+  overflow-wrap: anywhere;
+}
+
+.emailLink {
+  display: inline;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 6px;
+  text-decoration-color: transparent;
+  transition: text-decoration-color 200ms ease;
+
+  &:hover {
+    text-decoration-color: currentColor;
+  }
+
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 6px;
+    text-decoration-color: currentColor;
+  }
+}
+
+.address {
+  display: grid;
+  font-style: normal;
+}
+
+@media (min-width: 1200px) and (prefers-reduced-motion: no-preference) {
+  .image {
+    inset-block-start: -10%;
+    block-size: 120%;
+  }
+}
+
+@media (max-width: 1199px) {
+  .contactDetails {
+    padding-block-start: 140px;
+  }
+
+  .scene {
+    display: grid;
+    gap: 64px;
+  }
+
+  .imageFrame {
+    block-size: 640px;
+  }
+
+  .contactCard {
+    position: static;
+    inline-size: 80%;
+    margin-inline-start: auto;
+    padding: 0;
+    transform: none;
+  }
+
+  .contactList {
+    gap: 48px;
+  }
+
+  .value {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: $mobileBreakpoint) {
+  .contactDetails {
+    padding: 120px 20px 0;
+  }
+
+  .imageFrame {
+    block-size: 480px;
+    max-block-size: 70svh;
+  }
+
+  .contactCard {
+    inline-size: 100%;
+  }
+
+  .value {
+    font-size: clamp(23px, 6.7vw, 28px);
+  }
+}

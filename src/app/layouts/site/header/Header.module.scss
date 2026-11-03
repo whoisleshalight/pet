@@ -75,6 +75,38 @@
 	}
 }
 
+@media (max-width: $mobileBreakpoint) {
+	.siteHeader {
+		grid-template-columns: minmax(0, 1fr);
+		grid-template-areas:
+			'brand'
+			'navigation';
+		row-gap: 16px;
+	}
+
+	.siteHeaderExpanded {
+		grid-template-areas:
+			'title'
+			'availability'
+			'navigation'
+			'description';
+	}
+
+	.siteHeaderNavigation {
+		justify-self: start;
+		min-width: 0;
+	}
+
+	.siteHeaderLinks {
+		flex-wrap: wrap;
+		gap: 0.6em;
+	}
+
+	.siteHeaderLinks a {
+		font-size: clamp(16px, 4.5vw, 20px);
+	}
+}
+
 @media (prefers-reduced-motion: reduce) {
 	.siteHeaderExpanded {
 		position: static;
