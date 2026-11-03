@@ -1,0 +1,8 @@
+.container {
+	--container-padding-block: 0px;
+	--container-padding-inline: 80px;
+
+	inline-size: 100%;
+	min-inline-size: 0;
+	padding: var(--container-padding-block) var(--container-padding-inline);
+}

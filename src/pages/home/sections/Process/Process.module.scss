@@ -1,0 +1,297 @@
+@use '../../../../styles/variables' as *;
+
+.process {
+	--timeline-gutter: 40px;
+	--timeline-divisions: 12;
+}
+
+.processContainer {
+	display: grid;
+	gap: 64px;
+}
+
+.introduction {
+	display: grid;
+	justify-items: start;
+	gap: 16px;
+}
+
+.title {
+	max-inline-size: 100%;
+	font-size: 104px;
+	font-weight: 700;
+	line-height: 1;
+	letter-spacing: -0.04em;
+}
+
+.titleWord {
+	display: inline-block;
+	overflow: clip;
+	vertical-align: bottom;
+	white-space: nowrap;
+}
+
+.titleLetter {
+	display: inline-block;
+}
+
+.introductionCopy {
+	max-inline-size: 400px;
+	color: #444;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 1.6;
+}
+
+.wordMask {
+	display: inline-block;
+	overflow: clip;
+	vertical-align: bottom;
+}
+
+.word {
+	display: inline-block;
+}
+
+.timeline {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	grid-template-areas:
+		'chart'
+		'scale';
+}
+
+.guides {
+	z-index: 0;
+	display: grid;
+	grid-area: chart / chart / scale / scale;
+	grid-template-columns: repeat(var(--timeline-divisions), minmax(0, 1fr));
+	column-gap: var(--timeline-gutter);
+	border-inline-end: 1px dashed #e0e0e0;
+	pointer-events: none;
+}
+
+.guide {
+	border-inline-start: 1px dashed #e0e0e0;
+}
+
+.timelineRows {
+	z-index: 1;
+	display: grid;
+	grid-area: chart;
+	grid-template-columns: repeat(24, minmax(0, 1fr));
+	column-gap: var(--timeline-gutter);
+	row-gap: 13px;
+	margin: 0;
+	padding: 32px 0 34px;
+	list-style: none;
+}
+
+.bar {
+	display: grid;
+	min-inline-size: 0;
+}
+
+.discovery {
+	grid-row: 1;
+	grid-column: 1 / span 6;
+}
+
+.strategy {
+	grid-row: 2;
+	grid-column: 5 / span 7;
+}
+
+.design {
+	grid-row: 3;
+	grid-column: 9 / span 8;
+}
+
+.development {
+	grid-row: 4;
+	grid-column: 15 / -1;
+}
+
+.barFill {
+	grid-area: 1 / 1;
+	background: #000;
+}
+
+.barLabel {
+	z-index: 1;
+	grid-area: 1 / 1;
+	min-inline-size: 0;
+	padding: 10px 18px;
+	color: #fff;
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 1.6;
+	white-space: nowrap;
+}
+
+.scale {
+	z-index: 1;
+	display: grid;
+	grid-area: scale;
+	grid-template-columns: repeat(var(--timeline-divisions), minmax(0, 1fr));
+	column-gap: var(--timeline-gutter);
+}
+
+.tick {
+	color: #ccc;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 1.6;
+	letter-spacing: 1px;
+	text-align: center;
+}
+
+.steps {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 40px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.step {
+	display: grid;
+	align-content: start;
+	gap: 16px;
+	min-inline-size: 0;
+}
+
+.stepTitle {
+	font-size: 32px;
+	font-weight: 700;
+	line-height: 1.3;
+	letter-spacing: -0.04em;
+}
+
+.stepDescription {
+	max-inline-size: 80%;
+	color: #444;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 1.6;
+}
+
+@media (min-width: 1800px) {
+	.title {
+		font-size: 120px;
+	}
+}
+
+@media (min-width: 661px) and (max-width: 1199px) {
+	.process {
+		--timeline-gutter: 30px;
+		--timeline-divisions: 6;
+	}
+
+	.processContainer {
+		gap: 72px;
+	}
+
+	.title {
+		font-size: 80px;
+	}
+
+	.timelineRows {
+		grid-template-columns: repeat(12, minmax(0, 1fr));
+	}
+
+	.discovery {
+		grid-column: 1 / span 4;
+	}
+
+	.strategy {
+		grid-column: 3 / span 4;
+	}
+
+	.design {
+		grid-column: 5 / span 4;
+	}
+
+	.development {
+		grid-column: 8 / -1;
+	}
+
+	.guide:nth-child(n + 7),
+	.tick:nth-child(n + 7) {
+		display: none;
+	}
+
+	.steps {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 48px 30px;
+	}
+
+	.stepTitle {
+		font-size: 30px;
+	}
+}
+
+@media (max-width: $mobileBreakpoint) {
+	.process {
+		--timeline-gutter: 20px;
+		--timeline-divisions: 4;
+	}
+
+	.processContainer {
+		gap: 48px;
+	}
+
+	.title {
+		font-size: clamp(32px,
+				calc((100vw - 2 * var(--container-padding-inline)) * 0.23),
+				64px);
+	}
+
+	.barLabel {
+		padding-inline: 8px;
+		font-size: clamp(10px,
+				calc((100vw - 2 * var(--container-padding-inline)) * 0.06),
+				16px);
+	}
+
+	.timelineRows {
+		grid-template-columns: repeat(8, minmax(0, 1fr));
+	}
+
+	.discovery {
+		grid-column: 1 / span 5;
+	}
+
+	.strategy {
+		grid-column: 2 / span 5;
+	}
+
+	.design {
+		grid-column: 3 / span 5;
+	}
+
+	.development {
+		grid-column: 4 / -1;
+	}
+
+	.guide:nth-child(n + 5),
+	.tick:nth-child(n + 5) {
+		display: none;
+	}
+
+	.steps {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 40px;
+	}
+
+	.stepTitle {
+		font-size: clamp(22px,
+				calc((100vw - 2 * var(--container-padding-inline)) * 0.12),
+				28px);
+	}
+
+	.stepDescription {
+		max-inline-size: none;
+	}
+}

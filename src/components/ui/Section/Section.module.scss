@@ -1,0 +1,10 @@
+@use '../../../styles/variables' as *;
+
+.section {
+	inline-size: 100%;
+	min-inline-size: 0;
+	color: $colorInk;
+	background: $colorPaper;
+	padding-bottom: 100px;
+	padding-top: 100px;
+}
