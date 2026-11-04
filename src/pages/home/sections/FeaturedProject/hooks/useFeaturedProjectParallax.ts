@@ -24,9 +24,10 @@ export function useFeaturedProjectParallax(
 
         gsap.fromTo(
           media,
-          { y: getTravelDistance },
+          { y: getTravelDistance, scale: 1 },
           {
             y: () => -getTravelDistance(),
+            scale: 1.1,
             ease: 'none',
             scrollTrigger: {
               trigger: card,

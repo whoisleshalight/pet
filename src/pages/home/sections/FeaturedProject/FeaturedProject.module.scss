@@ -4,7 +4,7 @@
 	position: relative;
 	isolation: isolate;
 	overflow: clip;
-	padding-top: calc(100vh - 15%);
+	padding-top: calc(100vh - 20%);
 	padding-bottom: 0;
 }
 
@@ -72,10 +72,6 @@
 	animation-direction: reverse;
 }
 
-.motionPaused .tickerTrack {
-	animation-play-state: paused;
-}
-
 .projectCard {
 	position: relative;
 	display: block;
@@ -124,33 +120,6 @@
 	text-shadow: 0 2px 16px rgb(0 0 0 / 35%);
 }
 
-.motionButton {
-	position: absolute;
-	inset-inline-end: 32px;
-	inset-block-end: 32px;
-	display: grid;
-	place-items: center;
-	inline-size: 44px;
-	block-size: 44px;
-	border: 1px solid #dedede;
-	border-radius: 50%;
-	background: $colorPaper;
-}
-
-.motionButton svg {
-	inline-size: 16px;
-	block-size: 16px;
-}
-
-.motionButton:hover {
-	background: #f7f7f7;
-}
-
-.motionButton:focus-visible {
-	outline: 2px solid $colorInk;
-	outline-offset: 4px;
-}
-
 @keyframes marquee {
 	from {
 		transform: translateX(0);
@@ -163,23 +132,6 @@
 
 .projectCard .projectImage {
 	transition: all 1s;
-}
-
-@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-	.projectName {
-		transform: translateY(110%);
-		transition: transform 1000ms cubic-bezier(0.19, 1, 0.22, 1);
-	}
-
-	.projectCard:hover .projectImage,
-	.projectCard:focus-visible .projectImage {
-		transform: scale(1.05);
-	}
-
-	.projectCard:hover .projectName,
-	.projectCard:focus-visible .projectName {
-		transform: translateY(0);
-	}
 }
 
 @media (min-width: 661px) and (max-width: 1199px) {
@@ -210,8 +162,7 @@
 		transform: none;
 	}
 
-	.tickers,
-	.motionButton {
+	.tickers {
 		display: none;
 	}
 
@@ -227,9 +178,5 @@
 
 	.tickerTrack {
 		animation: none;
-	}
-
-	.motionButton {
-		display: none;
 	}
 }

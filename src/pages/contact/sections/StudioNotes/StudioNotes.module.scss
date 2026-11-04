@@ -31,28 +31,14 @@
 }
 
 .readAllLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 16px;
+  --arrow-link-gap: 16px;
+  --arrow-link-decoration: none;
+  --arrow-link-hover-distance: 5px;
+
   padding-block: 4px;
   font-size: 26px;
   line-height: 1.2;
   white-space: nowrap;
-
-  &:focus-visible {
-    outline: 2px solid currentColor;
-    outline-offset: 6px;
-  }
-
-  &:hover .arrow {
-    transform: translateX(5px);
-  }
-}
-
-.arrow {
-  inline-size: 24px;
-  block-size: 24px;
-  transition: transform 250ms ease;
 }
 
 .content {

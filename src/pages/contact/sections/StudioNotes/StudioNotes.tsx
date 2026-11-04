@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { Link } from 'react-router'
 import { routePaths } from '../../../../app/router/routePaths'
+import { ArrowLink } from '../../../../components/ui/ArrowLink'
 import { useStudioNotesAnimation } from './hooks/useStudioNotesAnimation'
 import { studioNoteItems } from './studioNoteItems'
 import styles from './StudioNotes.module.scss'
@@ -62,25 +63,13 @@ export function StudioNotes() {
         <p className={styles.description}>
           Our thoughts on how brands, systems, and stories find their form.
         </p>
-        <Link
+        <ArrowLink
           className={styles.readAllLink}
           to={routePaths.news}
+          arrowPosition="end"
         >
           Read All
-          <svg
-            className={styles.arrow}
-            viewBox="0 0 24 24"
-            fill="none"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <path
-              d="M4 12h15m-6-6 6 6-6 6"
-              stroke="currentColor"
-              strokeWidth="1.5"
-            />
-          </svg>
-        </Link>
+        </ArrowLink>
       </div>
     </section>
   )

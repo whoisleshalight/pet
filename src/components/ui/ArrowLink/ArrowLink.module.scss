@@ -1,0 +1,40 @@
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--arrow-link-gap, 12px);
+  max-inline-size: 100%;
+  text-decoration: var(--arrow-link-decoration, underline);
+  text-decoration-color: transparent;
+  text-underline-offset: 6px;
+  transition: text-decoration-color 200ms ease;
+
+  &:hover {
+    text-decoration-color: currentColor;
+  }
+
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 6px;
+  }
+}
+
+.arrowViewport {
+  display: inline-flex;
+  flex-shrink: 0;
+  overflow: clip;
+}
+
+.arrow {
+  inline-size: 24px;
+  block-size: 24px;
+}
+
+.right {
+  transition: transform 250ms ease;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .link:hover .right {
+    transform: translateX(var(--arrow-link-hover-distance, 3px));
+  }
+}

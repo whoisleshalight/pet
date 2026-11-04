@@ -1,15 +1,11 @@
 import type { ComponentPropsWithRef } from 'react'
-import { Container } from '../Container'
 import styles from './Section.module.scss'
 
-interface SectionProps extends ComponentPropsWithRef<'section'> {
-  containerClassName?: string
-}
+type SectionProps = ComponentPropsWithRef<'section'>
 
 export function Section({
   children,
   className,
-  containerClassName,
   ref,
   ...sectionProps
 }: SectionProps) {
@@ -19,7 +15,7 @@ export function Section({
 
   return (
     <section {...sectionProps} ref={ref} className={sectionClassName}>
-      <Container className={containerClassName}>{children}</Container>
+      {children}
     </section>
   )
 }
