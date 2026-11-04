@@ -1,4 +1,5 @@
 import { FeaturedProject } from './sections/FeaturedProject'
+import { Services } from './sections/Services'
 import { Partners } from './sections/Partners'
 import { Process } from './sections/Process'
 import { Faq } from './sections/Faq'
@@ -8,6 +9,7 @@ export function HomePage() {
   return (
     <div className={styles.homePage}>
       <FeaturedProject />
+      <Services />
       <Partners />
       <Process />
       <Faq />

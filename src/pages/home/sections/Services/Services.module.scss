@@ -1,0 +1,274 @@
+.services {
+  padding-block: 0;
+}
+
+.layout {
+  --container-padding-inline: 20px;
+
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  align-items: start;
+}
+
+.introduction {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+  min-inline-size: 0;
+  block-size: 100svh;
+  min-block-size: 560px;
+  padding: 230px 20px 40px;
+}
+
+.headingContainer {
+  flex: 1;
+}
+
+.title {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+.titleWord {
+  display: inline-block;
+  overflow: clip;
+  vertical-align: bottom;
+  white-space: nowrap;
+}
+
+.titleLetter {
+  display: inline-block;
+}
+
+.introductionCopy {
+  max-inline-size: 240px;
+  color: #757575;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.7;
+}
+
+.wordMask {
+  display: inline-block;
+  overflow: clip;
+  vertical-align: bottom;
+}
+
+.word {
+  display: inline-block;
+}
+
+.contactLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  max-inline-size: 100%;
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 6px;
+  transition: text-decoration-color 200ms ease;
+
+  &:hover {
+    text-decoration-color: currentColor;
+  }
+
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 6px;
+  }
+}
+
+.arrowViewport {
+  display: inline-flex;
+  flex-shrink: 0;
+  overflow: clip;
+}
+
+.arrow {
+  inline-size: 24px;
+  block-size: 24px;
+  transition: transform 250ms ease;
+}
+
+.contactLink:hover .arrow {
+  transform: translateX(3px);
+}
+
+.serviceList {
+  display: flex;
+  flex-direction: column;
+  gap: 180px;
+  min-inline-size: 0;
+  margin: 0;
+  padding: 230px 0 40px;
+  list-style: none;
+}
+
+.service {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 6fr);
+  align-items: start;
+  min-inline-size: 0;
+}
+
+.serviceIndex {
+  overflow: clip;
+  padding-inline: 20px;
+  color: #eee;
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  text-align: end;
+  white-space: nowrap;
+}
+
+.indexText {
+  display: inline-block;
+}
+
+.serviceBody {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 56px;
+  min-inline-size: 0;
+  padding-inline: 20px;
+}
+
+.description {
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+}
+
+.capabilities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-inline-size: 640px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.capability {
+  max-inline-size: 100%;
+  padding: 10px 20px;
+  border-radius: 99px;
+  background: #eee;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.7;
+}
+
+@media (min-width: 1600px) {
+  .title,
+  .contactLink {
+    font-size: 28px;
+  }
+}
+
+@media (min-width: 810px) and (max-width: 1199px) {
+  .layout {
+    --container-padding-inline: 15px;
+
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  }
+
+  .introduction {
+    padding: 160px 15px 30px;
+  }
+
+  .title,
+  .contactLink {
+    font-size: 25px;
+  }
+
+  .serviceList {
+    gap: 160px;
+    padding-block: 160px 30px;
+  }
+
+  .service {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+  }
+
+  .serviceIndex {
+    padding-inline: 0;
+    text-align: center;
+  }
+
+  .serviceIndex,
+  .description {
+    font-size: 44px;
+  }
+
+  .serviceBody {
+    padding-inline: 0;
+  }
+}
+
+@media (min-width: 810px) and (min-height: 600px) and (prefers-reduced-motion: reduce) {
+  .introduction {
+    position: sticky;
+    inset-block-start: 0;
+  }
+}
+
+@media (max-width: 809px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 64px;
+    padding-block: 100px 40px;
+  }
+
+  .introduction {
+    gap: 24px;
+    block-size: auto;
+    min-block-size: 0;
+    padding: 0;
+  }
+
+  .headingContainer {
+    flex: none;
+  }
+
+  .title,
+  .contactLink {
+    font-size: 24px;
+  }
+
+  .serviceList {
+    gap: 120px;
+    padding: 0;
+  }
+
+  .service {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .serviceIndex {
+    padding: 0;
+    text-align: start;
+  }
+
+  .serviceIndex,
+  .description {
+    font-size: clamp(28px, 9.2vw, 36px);
+  }
+
+  .serviceBody {
+    gap: 40px;
+    padding: 0;
+  }
+}
