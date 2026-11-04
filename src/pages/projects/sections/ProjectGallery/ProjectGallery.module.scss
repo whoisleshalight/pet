@@ -1,0 +1,249 @@
+@use '../../../../styles/variables' as *;
+
+.projectGallery {
+  position: relative;
+  color: $colorInk;
+  background: $colorPaper;
+}
+
+.viewport {
+  position: relative;
+  overflow: clip;
+}
+
+.track {
+  position: relative;
+  display: grid;
+  gap: 80px;
+  padding: 160px 40px 80px;
+}
+
+.introduction {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  justify-items: center;
+  gap: 32px;
+}
+
+.title {
+  font-size: clamp(80px, 12vw, 160px);
+  font-weight: 700;
+  line-height: 0.85;
+  letter-spacing: -0.065em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.titleLine {
+  display: block;
+}
+
+.titleLine + .titleLine {
+  margin-block-start: 16px;
+}
+
+.projectCount {
+  color: #d95649;
+  font-size: 52px;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.accessibleText {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.projects {
+  display: grid;
+  gap: 80px;
+}
+
+.project {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 40px;
+  min-inline-size: 0;
+}
+
+.imageLink {
+  position: relative;
+  display: block;
+  inline-size: min(100%, 760px);
+  aspect-ratio: 19 / 14;
+  overflow: clip;
+  background: #e4e1db;
+
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: -6px;
+  }
+}
+
+.projectImage {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  transition: transform 700ms cubic-bezier(0.2, 0.65, 0.3, 1);
+}
+
+.projectDetails {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+  inline-size: min(100%, 560px);
+  background: $colorPaper;
+}
+
+.projectText {
+  display: grid;
+  gap: 16px;
+}
+
+.category {
+  margin-block-end: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.7;
+}
+
+.projectTitle {
+  font-size: clamp(36px, 4.2vw, 64px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  overflow-wrap: anywhere;
+}
+
+.description {
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.caseStudyLink {
+  --arrow-link-gap: 16px;
+
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .imageLink:hover .projectImage {
+    transform: scale(1.035);
+  }
+}
+
+@media (min-width: 1200px) and (min-height: 600px) and (prefers-reduced-motion: no-preference) {
+  .viewport {
+    block-size: 100svh;
+  }
+
+  .track {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    inline-size: max-content;
+    block-size: 100%;
+    padding: 0 240px 0 160px;
+  }
+
+  .introduction {
+    flex-shrink: 0;
+    gap: 40px;
+    margin-inline-end: -64px;
+  }
+
+  .title {
+    font-size: clamp(128px, 12.5vw, 180px);
+  }
+
+  .projectCount {
+    font-size: 64px;
+  }
+
+  .projects {
+    display: flex;
+    flex-shrink: 0;
+    gap: 240px;
+    block-size: 100%;
+  }
+
+  .project {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 0;
+    block-size: 100%;
+  }
+
+  .imageLink {
+    flex-shrink: 0;
+    inline-size: 100svh;
+    block-size: 100%;
+    aspect-ratio: 1;
+  }
+
+  .projectDetails {
+    flex-shrink: 0;
+    justify-content: space-between;
+    inline-size: 480px;
+    min-block-size: 300px;
+    block-size: 49%;
+
+    // The white panel overlaps the image edge, as in the reference.
+    &::before {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      inset: -48px -64px;
+      background: $colorPaper;
+      pointer-events: none;
+    }
+  }
+}
+
+@media (max-width: $mobileBreakpoint) {
+  .track {
+    gap: 56px;
+    padding: 140px 20px 64px;
+  }
+
+  .title {
+    font-size: clamp(48px, 13vw, 80px);
+  }
+
+  .projectCount {
+    font-size: 40px;
+  }
+
+  .projects {
+    gap: 64px;
+  }
+
+  .project {
+    gap: 32px;
+  }
+
+  .imageLink {
+    aspect-ratio: 1;
+  }
+
+  .projectDetails {
+    gap: 32px;
+  }
+
+  .projectTitle {
+    font-size: clamp(32px, 9vw, 48px);
+  }
+}
