@@ -1,0 +1,332 @@
+@use '../../../../styles/variables' as *;
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  block-size: 100svh;
+  min-block-size: 760px;
+  padding: 0;
+  overflow: clip;
+}
+
+.introduction {
+  position: absolute;
+  z-index: 2;
+  inset-block-start: 17%;
+  inset-inline-start: 16.4%;
+  inline-size: min(695px, 58vw);
+}
+
+.title {
+  display: flex;
+  align-items: baseline;
+  gap: 0.22em;
+  font-size: clamp(48px, 4.2vw, 64px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  white-space: nowrap;
+}
+
+.rotatingWords {
+  display: inline-grid;
+}
+
+.rotatingWord {
+  grid-area: 1 / 1;
+  opacity: 0;
+}
+
+.rotatingWord:first-child {
+  opacity: 1;
+}
+
+.message {
+  display: grid;
+  justify-items: end;
+  gap: 32px;
+  margin-block-start: 16px;
+}
+
+.together {
+  font-size: clamp(120px, 12.5vw, 180px);
+  font-weight: 400;
+  line-height: 0.7;
+  letter-spacing: -0.07em;
+}
+
+.description {
+  inline-size: 65%;
+  color: #888;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+.descriptionEmphasis {
+  color: $colorInk;
+  font-weight: 700;
+}
+
+.reelButton {
+  position: absolute;
+  inset-block-start: 49%;
+  inset-inline-start: 14%;
+  display: block;
+  inline-size: 88%;
+  block-size: 39vw;
+  isolation: isolate;
+  background: $colorPaper;
+  color: $colorInk;
+}
+
+.reelButton:focus-visible {
+  outline: 2px solid $colorInk;
+  outline-offset: -8px;
+}
+
+.reelLabel {
+  position: absolute;
+  z-index: 2;
+  inset-block-start: 0;
+  inset-inline-start: 40%;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.8;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.reelButton:hover .reelLabel,
+.reelButton:focus-visible .reelLabel {
+  opacity: 1;
+}
+
+.wordmark {
+  position: absolute;
+  inset-block-start: 1.5vw;
+  inset-inline-start: 2vw;
+  display: flex;
+  font-size: 31vw;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.06em;
+  white-space: nowrap;
+  transform: rotate(-4deg);
+}
+
+.brandLetter {
+  display: block;
+}
+
+.videoLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  mix-blend-mode: lighten;
+  pointer-events: none;
+}
+
+.backgroundVideo {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.playbackControl {
+  position: absolute;
+  z-index: 3;
+  inset-inline-end: 28px;
+  inset-block-end: 24px;
+  display: grid;
+  place-items: center;
+  inline-size: 40px;
+  block-size: 40px;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  background: $colorPaper;
+  color: $colorInk;
+}
+
+.playbackControl:focus-visible,
+.closeButton:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+.videoError {
+  position: absolute;
+  z-index: 3;
+  inset-inline-end: 80px;
+  inset-block-end: 36px;
+  padding: 8px;
+  background: $colorPaper;
+  font-size: 14px;
+}
+
+.reelDialog {
+  position: fixed;
+  inset: 0;
+  inline-size: 100%;
+  max-inline-size: none;
+  block-size: 100%;
+  max-block-size: none;
+  margin: 0;
+  padding: clamp(20px, 4vw, 64px);
+  background: rgb(0 0 0 / 95%);
+  color: $colorPaper;
+  overscroll-behavior: contain;
+}
+
+.reelDialog::backdrop {
+  background: #000;
+}
+
+.dialogContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  min-block-size: 100%;
+  max-inline-size: 1600px;
+  margin-inline: auto;
+}
+
+.closeButton {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-end;
+  gap: 12px;
+  padding: 8px;
+  font-size: 16px;
+}
+
+.reelVideo {
+  display: block;
+  inline-size: 100%;
+  max-block-size: calc(100svh - 160px);
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+.reelError {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.accessibleTitle {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (min-width: 1025px) and (prefers-reduced-motion: no-preference) {
+  .hero {
+    // The existing fixed introduction occupies the first viewport.
+    margin-block-start: 100svh;
+  }
+}
+
+@media (max-width: $tabletBreakpoint) {
+  .hero {
+    block-size: auto;
+    min-block-size: 0;
+    padding-block-start: 120px;
+  }
+
+  .introduction {
+    position: relative;
+    inset: auto;
+    inline-size: min(560px, calc(100% - 48px));
+    margin-inline: auto;
+  }
+
+  .title {
+    justify-content: center;
+    font-size: 52px;
+  }
+
+  .message {
+    justify-items: center;
+    gap: 28px;
+    margin-block-start: 24px;
+  }
+
+  .together {
+    font-size: 140px;
+  }
+
+  .description {
+    inline-size: 100%;
+    max-inline-size: 460px;
+    text-align: center;
+  }
+
+  .reelButton {
+    position: relative;
+    inset: auto;
+    inline-size: 110%;
+    block-size: 40vw;
+    margin-block-start: 80px;
+    margin-inline-start: 4%;
+  }
+
+  .wordmark {
+    font-size: 37vw;
+  }
+
+  .reelLabel {
+    inset-block-start: -28px;
+    inset-inline-start: 36%;
+    opacity: 1;
+  }
+
+  .playbackControl {
+    inset-inline-end: 20px;
+    inset-block-end: 16px;
+  }
+}
+
+@media (max-width: $mobileBreakpoint) {
+  .hero {
+    padding-block-start: 80px;
+  }
+
+  .introduction {
+    inline-size: calc(100% - 40px);
+  }
+
+  .title {
+    gap: 0.18em;
+    font-size: clamp(30px, 7.5vw, 44px);
+  }
+
+  .together {
+    font-size: clamp(100px, 26vw, 140px);
+  }
+
+  .description {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .reelButton {
+    block-size: 46vw;
+    margin-block-start: 72px;
+  }
+
+  .wordmark {
+    inset-block-start: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reelLabel {
+    transition: none;
+  }
+}
