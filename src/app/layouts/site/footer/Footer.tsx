@@ -6,6 +6,7 @@ import { portfolio } from '../../../../config/portfolio'
 import { scrollToTop } from '../../../../lib/scroll'
 import { routePaths } from '../../../router/routePaths'
 import { useFooterAnimation } from './hooks/useFooterAnimation'
+import sectionStyles from '../../../../components/ui/Section/Section.module.scss'
 import styles from './Footer.module.scss'
 
 const currentYear = new Date().getFullYear()
@@ -46,7 +47,10 @@ export function Footer() {
   })
 
   return (
-    <footer ref={footerReference} className={styles.footer}>
+    <footer
+      ref={footerReference}
+      className={`${sectionStyles.section} ${styles.footer}`}
+    >
       <Container className={styles.footerContainer}>
         <div className={styles.masthead}>
           <div className={styles.brand}>

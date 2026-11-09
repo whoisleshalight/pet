@@ -49,52 +49,8 @@
 	display: block;
 }
 
-.siteHeaderAvailability {
-	grid-area: availability;
-	min-height: 0;
-}
-
-.siteHeaderAvailabilityLink {
-	display: inline-flex;
-	align-items: center;
-	gap: 4px;
-	padding: 2px 8px;
-	border: 1px solid $colorInk;
-	border-radius: 50px;
-	background: $colorInk;
-	color: $colorPaper;
-	font-size: 14px;
-	font-weight: 500;
-	line-height: 1.57;
-	text-decoration: none;
-	text-transform: uppercase;
-	transition:
-		color 200ms,
-		background-color 200ms;
-}
-
-.siteHeaderAvailabilityLink:hover {
-	color: $colorInk;
-	background-color: $colorPaper;
-}
-
-.siteHeaderAvailabilityLink:focus-visible {
-	outline-offset: -3px;
-}
-
-.siteHeaderAvailabilityDot {
-	width: 8px;
-	height: 8px;
-	border-radius: 50%;
-	background: $colorAvailable;
-}
-
 @media (max-width: $mobileBreakpoint) {
 	.siteHeaderDescription {
 		font-size: 14px;
-	}
-
-	.siteHeaderAvailabilityLink {
-		font-size: 13px;
 	}
 }

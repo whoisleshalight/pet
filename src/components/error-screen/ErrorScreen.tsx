@@ -1,7 +1,9 @@
-import styles from './ErrorScreen.module.scss'
 import { useId } from 'react'
 import { Link } from 'react-router'
 import { routePaths } from '../../app/router/routePaths'
+import { Container } from '../ui/Container'
+import { Section } from '../ui/Section'
+import styles from './ErrorScreen.module.scss'
 
 type ErrorScreenProps = {
   statusCode: number
@@ -18,12 +20,12 @@ export function ErrorScreen({
   const messageIdentifier = useId()
 
   return (
-    <section
+    <Section
       className={styles.errorScreen}
       aria-labelledby={titleIdentifier}
       aria-describedby={messageIdentifier}
     >
-      <div className={styles.errorScreenContent}>
+      <Container className={styles.errorScreenContent}>
         <h1 className={styles.errorScreenStatusCode} id={titleIdentifier}>
           {statusCode}
         </h1>
@@ -37,7 +39,7 @@ export function ErrorScreen({
             Back to Home
           </Link>
         </div>
-      </div>
-    </section>
+      </Container>
+    </Section>
   )
 }

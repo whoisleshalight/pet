@@ -33,7 +33,6 @@ export function Services() {
   return (
     <Section
       ref={sectionReference}
-      className={styles.services}
       aria-labelledby={headingId}
     >
       <Container className={styles.layout}>

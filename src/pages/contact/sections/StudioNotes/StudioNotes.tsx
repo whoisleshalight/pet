@@ -1,76 +1,59 @@
-import { useRef } from 'react'
-import { Link } from 'react-router'
+import { useId, useRef } from 'react'
 import { routePaths } from '../../../../app/router/routePaths'
 import { ArrowLink } from '../../../../components/ui/ArrowLink'
+import { Container } from '../../../../components/ui/Container'
+import { Section } from '../../../../components/ui/Section'
+import { StudioNoteCard } from './components/StudioNoteCard/StudioNoteCard'
 import { useStudioNotesAnimation } from './hooks/useStudioNotesAnimation'
 import { studioNoteItems } from './studioNoteItems'
 import styles from './StudioNotes.module.scss'
 
 export function StudioNotes() {
+  const headingId = useId()
   const sectionReference = useRef<HTMLElement>(null)
+  const sidebarReference = useRef<HTMLDivElement>(null)
   const introductionReference = useRef<HTMLDivElement>(null)
 
-  useStudioNotesAnimation(sectionReference, introductionReference)
+  useStudioNotesAnimation({
+    sectionReference,
+    sidebarReference,
+    introductionReference,
+  })
 
   return (
-    <section
+    <Section
       ref={sectionReference}
       className={styles.studioNotes}
-      aria-labelledby="studio-notes-title"
+      aria-labelledby={headingId}
     >
-      <div className={styles.content}>
-        <h2 id="studio-notes-title" className={styles.title}>
-          News
-        </h2>
+      <Container className={styles.layout}>
+        <div className={styles.content}>
+          <h2 id={headingId} className={styles.title}>
+            News
+          </h2>
 
-        <div className={styles.notesGrid}>
-          {studioNoteItems.map((note) => {
-            return (
-              <article key={note.id} className={styles.note}>
-                <Link
-                  className={styles.noteLink}
-                  to={`${routePaths.news}/${note.id}`}
-                >
-                  <div className={styles.imageFrame}>
-                    <img
-                      className={styles.noteImage}
-                      src={note.image}
-                      width={771}
-                      height={1024}
-                      alt={note.imageAlt}
-                      loading="lazy"
-                      decoding="async"
-                      style={{ objectPosition: note.imagePosition }}
-                    />
-                    <span className={styles.imageArrow} aria-hidden="true">↗</span>
-                  </div>
-
-                  <div className={styles.noteText}>
-                    <time className={styles.date} dateTime={note.date}>
-                      {note.dateLabel}
-                    </time>
-                    <h3 className={styles.noteTitle}>{note.title}</h3>
-                    <p className={styles.noteDescription}>{note.description}</p>
-                  </div>
-                </Link>
-              </article>
-            )
-          })}
+          <div className={styles.notesGrid}>
+            {studioNoteItems.map((note) => {
+              return <StudioNoteCard key={note.id} note={note} />
+            })}
+          </div>
         </div>
-      </div>
 
-      <div ref={introductionReference} className={styles.introduction}>
-        <p className={styles.description}>
-          Our thoughts on how brands, systems, and stories find their form.
-        </p>
-        <ArrowLink
-          className={styles.readAllLink}
-          to={routePaths.news}
-          arrowPosition="end"
-        >
-          Read All
-        </ArrowLink>
-      </div>
-    </section>
+        <div ref={sidebarReference} className={styles.sidebar}>
+          <div ref={introductionReference} className={styles.introduction}>
+            <p className={styles.description}>
+              Our thoughts on how brands, systems, and stories find their form.
+            </p>
+            <ArrowLink
+              className={styles.readAllLink}
+              to={routePaths.news}
+              arrowPosition="end"
+            >
+              Read All
+            </ArrowLink>
+          </div>
+        </div>
+      </Container>
+    </Section>
   )
 }

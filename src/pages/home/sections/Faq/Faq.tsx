@@ -31,7 +31,6 @@ export function Faq() {
     <Section
       ref={sectionReference}
       id="faq"
-      className={styles.faq}
       aria-labelledby={headingId}
     >
       <Container className={styles.layout}>

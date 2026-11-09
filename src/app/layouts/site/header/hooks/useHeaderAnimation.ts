@@ -20,39 +20,39 @@ const brandRevealStart = 0.5
 
 type HeaderAnimationOptions = {
   headerReference: RefObject<HTMLElement | null>
+  containerReference: RefObject<HTMLDivElement | null>
   navigationReference: RefObject<HTMLElement | null>
   brandTextReference: RefObject<HTMLSpanElement | null>
   titleReference: RefObject<HTMLDivElement | null>
   descriptionReference: RefObject<HTMLDivElement | null>
-  availabilityReference: RefObject<HTMLDivElement | null>
   isHeaderExpanded: boolean
 }
 
 export function useHeaderAnimation({
   headerReference,
+  containerReference,
   navigationReference,
   brandTextReference,
   titleReference,
   descriptionReference,
-  availabilityReference,
   isHeaderExpanded,
 }: HeaderAnimationOptions) {
   useGSAP(
     () => {
       const header = headerReference.current
+      const container = containerReference.current
       const navigation = navigationReference.current
       const brandText = brandTextReference.current
       const title = titleReference.current
       const description = descriptionReference.current
-      const availability = availabilityReference.current
       if (
         !isHeaderExpanded ||
         !header ||
+        !container ||
         !navigation ||
         !brandText ||
         !title ||
-        !description ||
-        !availability
+        !description
       ) return
 
       const mediaQueries = gsap.matchMedia()
@@ -83,12 +83,11 @@ export function useHeaderAnimation({
         })
 
         entrance.from(
-          select(`.${introductionStyles.siteHeaderDescriptionContent}, .${introductionStyles.siteHeaderAvailabilityLink}`),
+          select(`.${introductionStyles.siteHeaderDescriptionContent}`),
           {
             opacity: 0,
             y: 16,
             duration: 0.9,
-            stagger: 0.1,
             ease: 'power3.out',
           },
           0.4,
@@ -125,11 +124,11 @@ export function useHeaderAnimation({
         })
 
         transition.to(
-          [description, availability],
+          description,
           {
             autoAlpha: 0,
             y: () => brandText.offsetHeight - title.offsetHeight -
-              parseFloat(getComputedStyle(header).rowGap),
+              parseFloat(getComputedStyle(container).rowGap),
           },
           0,
         )

@@ -58,6 +58,7 @@ export function FeaturedProject() {
         <Link
           ref={cardReference}
           className={styles.projectCard}
+          data-cursor-label="View"
           to={`${routePaths.projects}/golden-hour`}
           aria-label="Golden Hour — view project"
         >
@@ -66,7 +67,7 @@ export function FeaturedProject() {
               className={styles.projectImage}
               src={projectImage}
               srcSet={`${projectImage} 768w, ${projectImageLarge} 1536w`}
-              sizes="(max-width: 660px) calc(100vw - 40px), (max-width: 1199px) calc((100vw - 80px) * 0.6667), calc((100vw - 160px) / 3)"
+              sizes="(max-width: 660px) calc(100vw - 160px), (max-width: 1199px) calc((100vw - 160px) * 0.6667), 70vw"
               width={768}
               height={1024}
               alt="A close-up of a blue eye behind translucent, pale blue fabric."

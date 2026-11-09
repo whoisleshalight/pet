@@ -1,20 +1,16 @@
 import styles from './HeaderIntroduction.module.scss'
 import type { RefObject } from 'react'
-import { Link } from 'react-router'
-import { routePaths } from '../../../router/routePaths'
 import { portfolio } from '../../../../config/portfolio'
 import { getAnimatedLetters } from './getAnimatedLetters'
 
 type HeaderIntroductionProps = {
   titleReference: RefObject<HTMLDivElement | null>
   descriptionReference: RefObject<HTMLDivElement | null>
-  availabilityReference: RefObject<HTMLDivElement | null>
 }
 
 export function HeaderIntroduction({
   titleReference,
   descriptionReference,
-  availabilityReference,
 }: HeaderIntroductionProps) {
   return (
     <>
@@ -49,12 +45,6 @@ export function HeaderIntroduction({
             <span key={line}>{line}</span>
           ))}
         </p>
-      </div>
-      <div ref={availabilityReference} className={styles.siteHeaderAvailability}>
-        <Link className={styles.siteHeaderAvailabilityLink} to={routePaths.contact}>
-          {portfolio.availability}
-          <span className={styles.siteHeaderAvailabilityDot} aria-hidden="true" />
-        </Link>
       </div>
     </>
   )

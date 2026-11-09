@@ -1,4 +1,6 @@
 import { useRef } from 'react'
+import { Container } from '../../../../components/ui/Container'
+import { Section } from '../../../../components/ui/Section'
 import { portfolio } from '../../../../config/portfolio'
 import { useContactDetailsAnimation } from './hooks/useContactDetailsAnimation'
 import studioExteriorLarge from './assets/studio-exterior-1920.webp'
@@ -13,63 +15,58 @@ export function ContactDetails() {
   useContactDetailsAnimation(sectionReference, imageReference, cardReference)
 
   return (
-    <section
-      ref={sectionReference}
-      className={styles.contactDetails}
-      aria-labelledby="contact-title"
-    >
-      <h1 id="contact-title" className={styles.visuallyHidden}>
-        Let’s talk. Get in touch.
-      </h1>
+    <Section ref={sectionReference}>
+		  <Container>
+			  <h1 className={styles.title}>Contacts</h1>
+        <div className={styles.scene}>
+          <div className={styles.imageFrame}>
+            <img
+              ref={imageReference}
+              className={styles.image}
+              src={studioExteriorLarge}
+              srcSet={`${studioExteriorSmall} 960w, ${studioExteriorLarge} 1920w`}
+              sizes="calc(100vw - 160px)"
+              width={1920}
+              height={1446}
+              alt="Sunlit studio building with tall windows, trees, and cyclists passing by."
+              fetchPriority="high"
+              decoding="async"
+            />
+          </div>
 
-      <div className={styles.scene}>
-        <div className={styles.imageFrame}>
-          <img
-            ref={imageReference}
-            className={styles.image}
-            src={studioExteriorLarge}
-            srcSet={`${studioExteriorSmall} 960w, ${studioExteriorLarge} 1920w`}
-            sizes="(max-width: 660px) calc(100vw - 40px), calc(100vw - 80px)"
-            width={1920}
-            height={1446}
-            alt="Sunlit studio building with tall windows, trees, and cyclists passing by."
-            fetchPriority="high"
-            decoding="async"
-          />
+          <div ref={cardReference} className={styles.contactCard}>
+            <dl className={styles.contactList}>
+              <div className={styles.contactGroup}>
+                <dt className={styles.label}>Email</dt>
+                <dd className={styles.value}>
+                  <a
+                    className={styles.emailLink}
+                    href={`mailto:${portfolio.emailAddress}`}
+                  >
+                    {portfolio.emailAddress}
+                  </a>
+                </dd>
+              </div>
+
+              <div className={styles.contactGroup}>
+                <dt className={styles.label}>Phone</dt>
+                <dd className={styles.value}>+38 (000) 000 00 00</dd>
+              </div>
+
+              <div className={styles.contactGroup}>
+                <dt className={styles.label}>Address</dt>
+                <dd className={styles.value}>
+                  <address className={styles.address}>
+                    <span>Your studio name</span>
+                    <span>Street name, 00</span>
+                    <span>City, Country</span>
+                  </address>
+                </dd>
+              </div>
+            </dl>
+          </div>
         </div>
-
-        <div ref={cardReference} className={styles.contactCard}>
-          <dl className={styles.contactList}>
-            <div className={styles.contactGroup}>
-              <dt className={styles.label}>Email</dt>
-              <dd className={styles.value}>
-                <a
-                  className={styles.emailLink}
-                  href={`mailto:${portfolio.emailAddress}`}
-                >
-                  {portfolio.emailAddress}
-                </a>
-              </dd>
-            </div>
-
-            <div className={styles.contactGroup}>
-              <dt className={styles.label}>Phone</dt>
-              <dd className={styles.value}>+38 (000) 000 00 00</dd>
-            </div>
-
-            <div className={styles.contactGroup}>
-              <dt className={styles.label}>Address</dt>
-              <dd className={styles.value}>
-                <address className={styles.address}>
-                  <span>Your studio name</span>
-                  <span>Street name, 00</span>
-                  <span>City, Country</span>
-                </address>
-              </dd>
-            </div>
-          </dl>
-        </div>
-      </div>
-    </section>
+      </Container>
+    </Section>
   )
 }

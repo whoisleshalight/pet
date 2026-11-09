@@ -4,15 +4,12 @@
 	position: relative;
 	isolation: isolate;
 	overflow: clip;
-	padding-top: 100px;
-	padding-bottom: 0;
 }
 
 .projectContainer {
 	display: grid;
 	justify-items: center;
 	position: relative;
-
 }
 
 .accessibleTitle {
@@ -135,24 +132,12 @@
 }
 
 @media (min-width: 661px) and (max-width: 1199px) {
-	.projectContainer {
-		--container-padding-inline: 40px;
-	}
-
 	.projectCard {
 		inline-size: calc(100% * 2 / 3);
 	}
 }
 
 @media (max-width: $mobileBreakpoint) {
-	.featuredProject {
-		padding-block: 64px;
-	}
-
-	.projectContainer {
-		--container-padding-inline: 20px;
-	}
-
 	.projectCard {
 		inline-size: 100%;
 	}

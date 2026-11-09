@@ -1,15 +1,21 @@
-import type { ReactNode } from 'react'
+import type { ComponentPropsWithRef } from 'react'
 import styles from './Container.module.scss'
 
-interface ContainerProps {
-  children: ReactNode
-  className?: string
-}
+type ContainerProps = ComponentPropsWithRef<'div'>
 
-export function Container({ children, className }: ContainerProps) {
+export function Container({
+  children,
+  className,
+  ref,
+  ...containerProps
+}: ContainerProps) {
   const containerClassName = className
     ? `${styles.container} ${className}`
     : styles.container
 
-  return <div className={containerClassName}>{children}</div>
+  return (
+    <div {...containerProps} ref={ref} className={containerClassName}>
+      {children}
+    </div>
+  )
 }

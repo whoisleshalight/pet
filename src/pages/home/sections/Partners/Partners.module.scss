@@ -2,7 +2,6 @@
 
 .partners {
 	isolation: isolate;
-	padding-top: 0;
 }
 
 .sequence {
@@ -82,22 +81,19 @@
 		// Both layers stay in normal flow; the logo stage defines the scroll distance.
 		grid-template-areas: 'stage';
 		gap: 0;
-		padding-block-end: 0vh;
 	}
 
 	.introduction {
 		grid-area: stage;
-		grid-template-rows: 45vh 1fr auto;
+		grid-template-rows: auto 1fr auto;
 		align-self: start;
 		gap: 0;
 		block-size: 100vh;
-		padding-block-end: 40px;
 	}
 
 	.title {
 		grid-row: 1;
-		align-self: end;
-		translate: 0 50%;
+		align-self: start;
 	}
 
 	.logoStage {

@@ -1,12 +1,6 @@
 @use '../../../../styles/variables' as *;
 
-.faq {
-  padding-block: 0;
-}
-
 .layout {
-  --container-padding-inline: 40px;
-
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
 }
@@ -17,9 +11,8 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 80px;
-  block-size: 100svh;
-  min-block-size: 560px;
-  padding-block: clamp(160px, 16.67vw, 240px) 40px;
+  block-size: calc(100svh - 2 * var(--section-padding-block));
+  min-block-size: calc(560px - 2 * var(--section-padding-block));
   padding-inline-end: 40px;
 }
 
@@ -56,7 +49,6 @@
 
 .content {
   min-inline-size: 0;
-  padding-block: clamp(160px, 16.67vw, 240px) 40px;
 }
 
 .questions {
@@ -85,7 +77,7 @@
 @media (min-width: 1200px) and (prefers-reduced-motion: reduce) {
   .introduction {
     position: sticky;
-    inset-block-start: 0;
+    inset-block-start: var(--section-padding-block);
   }
 }
 
@@ -93,7 +85,6 @@
   .layout {
     grid-template-columns: minmax(0, 1fr);
     gap: 80px;
-    padding-block: 100px 64px;
   }
 
   .introduction {
@@ -123,8 +114,6 @@
 
 @media (max-width: $mobileBreakpoint) {
   .layout {
-    --container-padding-inline: 20px;
-
     gap: 64px;
   }
 

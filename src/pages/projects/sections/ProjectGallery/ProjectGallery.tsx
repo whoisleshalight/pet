@@ -2,6 +2,8 @@ import { useRef } from 'react'
 import { Link } from 'react-router'
 import { routePaths } from '../../../../app/router/routePaths'
 import { ArrowLink } from '../../../../components/ui/ArrowLink'
+import { Container } from '../../../../components/ui/Container'
+import { Section } from '../../../../components/ui/Section'
 import { useProjectGalleryScroll } from './hooks/useProjectGalleryScroll'
 import { projectItems } from './projectItems'
 import styles from './ProjectGallery.module.scss'
@@ -14,13 +16,13 @@ export function ProjectGallery() {
   useProjectGalleryScroll(sectionReference, viewportReference, trackReference)
 
   return (
-    <section
+    <Section
       ref={sectionReference}
       className={styles.projectGallery}
       aria-labelledby="projects-title"
     >
       <div ref={viewportReference} className={styles.viewport}>
-        <div ref={trackReference} className={styles.track}>
+        <Container ref={trackReference} className={styles.track}>
           <div className={styles.introduction}>
             <h1 id="projects-title" className={styles.title}>
               <span className={styles.titleLine}>Our</span>
@@ -45,6 +47,7 @@ export function ProjectGallery() {
                 >
                   <Link
                     className={styles.imageLink}
+                    data-cursor-label="View"
                     to={projectPath}
                     aria-label={`View ${project.title} case study`}
                   >
@@ -52,7 +55,7 @@ export function ProjectGallery() {
                       className={styles.projectImage}
                       src={project.image}
                       srcSet={`${project.image} 768w, ${project.imageLarge} 1536w`}
-                      sizes="(min-width: 1200px) and (min-height: 600px) and (prefers-reduced-motion: no-preference) 100svh, (min-width: 661px) min(760px, 100vw - 80px), calc(100vw - 40px)"
+                      sizes="(min-width: 1200px) and (min-height: 600px) and (prefers-reduced-motion: no-preference) calc(100svh - 200px), min(760px, 100vw - 160px)"
                       width={1536}
                       height={1536}
                       alt={project.imageAlt}
@@ -82,8 +85,8 @@ export function ProjectGallery() {
               )
             })}
           </div>
-        </div>
+        </Container>
       </div>
-    </section>
+    </Section>
   )
 }

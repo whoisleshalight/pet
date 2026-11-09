@@ -8,6 +8,7 @@ import {
 } from "react-router";
 import { portfolio } from "../../../config/portfolio";
 import { Scrollbar } from "../../../components/scrollbar";
+import { CursorFollower } from "../../../components/common/CursorFollower/CursorFollower";
 import { Header } from "./header";
 import { Footer } from "./footer/Footer.tsx";
 import type { HeaderVariant } from "./header";
@@ -53,7 +54,7 @@ export function SiteLayout() {
                     ref={scrollContentReference}
                 >
                     <main
-                        className={styles.siteMain}
+                        className={`${styles.siteMain}${headerVariant === "expanded" ? ` ${styles.siteMainExpandedHeader}` : ""}`}
                         id="main-content"
                         ref={mainContentReference}
                         tabIndex={-1}
@@ -69,6 +70,7 @@ export function SiteLayout() {
                 controlsId="scroll-content"
             />
             <ScrollRestoration />
+            <CursorFollower />
         </>
     );
 }

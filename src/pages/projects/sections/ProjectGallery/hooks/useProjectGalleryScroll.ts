@@ -30,8 +30,8 @@ export function useProjectGalleryScroll(
             x: () => -getScrollDistance(),
             ease: 'none',
             scrollTrigger: {
-              trigger: section,
-              start: 'top top',
+              trigger: viewport,
+              start: () => `top top+=${getComputedStyle(section).paddingBlockStart}`,
               end: () => `+=${getScrollDistance()}`,
               pin: viewport,
               pinSpacing: true,

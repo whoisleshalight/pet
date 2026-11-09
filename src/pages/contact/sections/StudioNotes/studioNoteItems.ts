@@ -1,7 +1,7 @@
 import logicOfEmotionImage from './assets/logic-of-emotion.webp'
 import precisionOverPerfectionImage from './assets/precision-over-perfection.webp'
 
-interface StudioNote {
+export interface StudioNote {
   id: string
   title: string
   date: string

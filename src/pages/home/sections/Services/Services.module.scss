@@ -1,10 +1,4 @@
-.services {
-  padding-block: 0;
-}
-
 .layout {
-  --container-padding-inline: 20px;
-
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
   align-items: start;
@@ -16,9 +10,9 @@
   align-items: flex-start;
   gap: 40px;
   min-inline-size: 0;
-  block-size: 100svh;
-  min-block-size: 560px;
-  padding: 230px 20px 40px;
+  block-size: calc(100svh - 2 * var(--section-padding-block));
+  min-block-size: calc(560px - 2 * var(--section-padding-block));
+  padding-inline-end: 20px;
 }
 
 .headingContainer {
@@ -74,7 +68,7 @@
   gap: 180px;
   min-inline-size: 0;
   margin: 0;
-  padding: 230px 0 40px;
+  padding: 0;
   list-style: none;
 }
 
@@ -107,7 +101,7 @@
   align-items: flex-start;
   gap: 56px;
   min-inline-size: 0;
-  padding-inline: 20px;
+  padding-inline-start: 20px;
 }
 
 .description {
@@ -146,13 +140,11 @@
 
 @media (min-width: 810px) and (max-width: 1199px) {
   .layout {
-    --container-padding-inline: 15px;
-
     grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
   }
 
   .introduction {
-    padding: 160px 15px 30px;
+    padding-inline-end: 15px;
   }
 
   .title,
@@ -162,7 +154,6 @@
 
   .serviceList {
     gap: 160px;
-    padding-block: 160px 30px;
   }
 
   .service {
@@ -187,7 +178,7 @@
 @media (min-width: 810px) and (min-height: 600px) and (prefers-reduced-motion: reduce) {
   .introduction {
     position: sticky;
-    inset-block-start: 0;
+    inset-block-start: var(--section-padding-block);
   }
 }
 
@@ -195,7 +186,6 @@
   .layout {
     grid-template-columns: minmax(0, 1fr);
     gap: 64px;
-    padding-block: 100px 40px;
   }
 
   .introduction {

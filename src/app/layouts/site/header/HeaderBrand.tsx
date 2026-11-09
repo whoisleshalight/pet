@@ -1,7 +1,7 @@
 import styles from './HeaderBrand.module.scss'
 import { useRef } from 'react'
 import type { MouseEvent, RefObject } from 'react'
-import { Link } from 'react-router'
+import { Link, useLocation } from 'react-router'
 import { routePaths } from '../../../router/routePaths'
 import { portfolio } from '../../../../config/portfolio'
 import { scrollToTop } from '../../../../lib/scroll'
@@ -14,12 +14,14 @@ type HeaderBrandProps = {
 }
 
 export function HeaderBrand({ isExpanded, textReference }: HeaderBrandProps) {
+  const { pathname } = useLocation()
   const brandReference = useRef<HTMLAnchorElement>(null)
   const { contextSafe } = useGSAP({ scope: brandReference })
 
   const handleHomeClick = contextSafe((event: MouseEvent<HTMLAnchorElement>) => {
     if (
       !isExpanded ||
+      pathname !== routePaths.home ||
       event.button !== 0 ||
       event.metaKey ||
       event.ctrlKey ||

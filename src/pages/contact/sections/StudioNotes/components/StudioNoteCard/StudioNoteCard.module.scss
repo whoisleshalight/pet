@@ -1,0 +1,125 @@
+@use '../../../../../../styles/variables' as *;
+
+.note {
+  min-inline-size: 0;
+}
+
+.noteLink {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 8px;
+  }
+}
+
+.imageFrame {
+  position: relative;
+  min-inline-size: 0;
+  inline-size: 100%;
+  aspect-ratio: 1856 / 2464;
+  overflow: hidden;
+  background: #e3e0da;
+}
+
+.noteImage {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  transition: transform 650ms cubic-bezier(0.2, 0.65, 0.3, 1);
+}
+
+.imageArrow {
+  position: absolute;
+  inset-block-start: 20px;
+  inset-inline-end: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 48px;
+  block-size: 48px;
+  border-radius: 50%;
+  color: $colorInk;
+  background: $colorPaper;
+  font-size: 26px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 250ms ease, transform 250ms ease;
+}
+
+.noteText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.date {
+  color: #767676;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.noteTitle {
+  font-size: clamp(24px, 2.3vw, 32px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+  transition: text-decoration-color 250ms ease;
+}
+
+.noteDescription {
+  max-inline-size: 90%;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.noteLink:focus-visible {
+  .imageArrow {
+    opacity: 1;
+    transform: none;
+  }
+
+  .noteTitle {
+    text-decoration-color: currentColor;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .noteLink:hover {
+    .noteImage {
+      transform: scale(1.035);
+    }
+
+    .imageArrow {
+      opacity: 1;
+      transform: none;
+    }
+
+    .noteTitle {
+      text-decoration-color: currentColor;
+    }
+  }
+}
+
+@media (max-width: $mobileBreakpoint) {
+  .noteLink {
+    gap: 24px;
+  }
+
+  .noteTitle {
+    font-size: 28px;
+  }
+
+  .noteDescription {
+    max-inline-size: 100%;
+    font-size: 16px;
+  }
+}

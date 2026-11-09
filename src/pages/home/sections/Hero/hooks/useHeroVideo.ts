@@ -1,28 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import type { RefObject } from 'react'
 
-interface HeroVideoOptions {
-  sectionReference: RefObject<HTMLElement | null>
-  videoReference: RefObject<HTMLVideoElement | null>
-  isReelOpen: boolean
-}
-
-type PlaybackPreference = 'automatic' | 'play' | 'pause'
-
-export function useHeroVideo({
-  sectionReference,
-  videoReference,
-  isReelOpen,
-}: HeroVideoOptions) {
-  const [preference, setPreference] = useState<PlaybackPreference>('automatic')
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [hasVideoError, setHasVideoError] = useState(false)
-
+export function useHeroVideo(
+  videoReference: RefObject<HTMLVideoElement | null>,
+) {
   useEffect(() => {
-    const section = sectionReference.current
     const video = videoReference.current
 
-    if (!section || !video) {
+    if (!video) {
       return
     }
 
@@ -30,48 +15,50 @@ export function useHeroVideo({
     let isVisible = false
     let isDisposed = false
 
+    function shouldPlayVideo() {
+      return isVisible && !document.hidden && !reducedMotion.matches
+    }
+
     function synchronizePlayback() {
       if (!video) {
         return
       }
 
-      const shouldPlay = preference === 'play' || (
-        preference === 'automatic' && !reducedMotion.matches
-      )
-
-      if (!shouldPlay || !isVisible || document.hidden || isReelOpen) {
+      if (!shouldPlayVideo()) {
         video.pause()
-        setIsPlaying(false)
         return
       }
 
-      void video.play().then(() => {
-        if (isDisposed) {
-          return
-        }
+      if (!video.paused) {
+        return
+      }
 
-        if (!isVisible || document.hidden || isReelOpen) {
-          video.pause()
-        }
-      }).catch(() => {
-        // Autoplay can be blocked; the visible play control lets the user retry.
-        if (!isDisposed) {
-          setIsPlaying(false)
-        }
-      })
-    }
+      void video
+        .play()
+        .then(() => {
+          if (isDisposed) {
+            return
+          }
 
-    function handlePlay() {
-      setIsPlaying(true)
-    }
+          if (!shouldPlayVideo()) {
+            video.pause()
+          }
+        })
+        .catch((error: unknown) => {
+          if (isDisposed) {
+            return
+          }
 
-    function handlePause() {
-      setIsPlaying(false)
-    }
+          // These browser restrictions leave the poster or current frame visible.
+          if (
+            error instanceof DOMException &&
+            (error.name === 'NotAllowedError' || error.name === 'AbortError')
+          ) {
+            return
+          }
 
-    function handleError() {
-      setHasVideoError(true)
-      setIsPlaying(false)
+          console.warn('The Hero background video could not be played.', error)
+        })
     }
 
     const observer = new IntersectionObserver(([entry]) => {
@@ -79,28 +66,19 @@ export function useHeroVideo({
       synchronizePlayback()
     })
 
-    observer.observe(section)
-    video.addEventListener('play', handlePlay)
-    video.addEventListener('pause', handlePause)
-    video.addEventListener('error', handleError)
+    observer.observe(video)
+    video.addEventListener('play', synchronizePlayback)
     document.addEventListener('visibilitychange', synchronizePlayback)
     reducedMotion.addEventListener('change', synchronizePlayback)
+    synchronizePlayback()
 
     return () => {
       isDisposed = true
       observer.disconnect()
-      video.removeEventListener('play', handlePlay)
-      video.removeEventListener('pause', handlePause)
-      video.removeEventListener('error', handleError)
+      video.removeEventListener('play', synchronizePlayback)
       document.removeEventListener('visibilitychange', synchronizePlayback)
       reducedMotion.removeEventListener('change', synchronizePlayback)
       video.pause()
     }
-  }, [sectionReference, videoReference, preference, isReelOpen])
-
-  function togglePlayback() {
-    setPreference(isPlaying ? 'pause' : 'play')
-  }
-
-  return { isPlaying, hasVideoError, togglePlayback }
+  }, [videoReference])
 }

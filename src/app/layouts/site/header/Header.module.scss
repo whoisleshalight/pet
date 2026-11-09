@@ -4,13 +4,18 @@
 	position: fixed;
 	inset: 0 0 auto;
 	z-index: 20;
+	color: $colorPaper;
+	mix-blend-mode: difference;
+	pointer-events: none;
+}
+
+.siteHeaderContainer {
 	display: grid;
 	grid-template-columns: minmax(0, 1fr) auto;
 	grid-template-areas: 'brand navigation';
 	align-items: start;
 	column-gap: $pageGutter;
-	padding: $pageMargin;
-	pointer-events: none;
+	padding-block: $pageMargin;
 }
 
 .siteHeader a {
@@ -44,11 +49,11 @@
 	background-size: 100% 1px;
 }
 
-.siteHeaderExpanded {
+.siteHeaderExpanded .siteHeaderContainer {
 	grid-template-columns: repeat(12, minmax(0, 1fr));
 	grid-template-areas:
 		'title title title title title title title title title title title title'
-		'description description description description description description availability availability availability . . .';
+		'description description description description description description . . . . . .';
 	row-gap: $pageGutter;
 }
 
@@ -61,10 +66,13 @@
 @media (max-width: $tabletBreakpoint) {
 	.siteHeaderExpanded {
 		position: static;
+	}
+
+	.siteHeaderExpanded .siteHeaderContainer {
 		grid-template-columns: minmax(0, 1fr) auto;
 		grid-template-areas:
 			'title title'
-			'availability navigation'
+			'. navigation'
 			'description description';
 	}
 
@@ -76,7 +84,7 @@
 }
 
 @media (max-width: $mobileBreakpoint) {
-	.siteHeader {
+	.siteHeaderContainer {
 		grid-template-columns: minmax(0, 1fr);
 		grid-template-areas:
 			'brand'
@@ -84,10 +92,9 @@
 		row-gap: 16px;
 	}
 
-	.siteHeaderExpanded {
+	.siteHeaderExpanded .siteHeaderContainer {
 		grid-template-areas:
 			'title'
-			'availability'
 			'navigation'
 			'description';
 	}

@@ -5,6 +5,5 @@ export const portfolio = {
   shortName: 'WHOISLESHALIGHT',
   role: 'SENIOR FRONT-END DEVELOPER & WORDPRESS EXPERT',
   introduction: ['Creating websites & experiences impossible to ignore.', 'one pixel at a time'],
-  availability: 'Available',
   emailAddress: 'hello@whoisleshalight.com',
 }

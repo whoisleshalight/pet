@@ -15,7 +15,6 @@
   position: relative;
   display: grid;
   gap: 80px;
-  padding: 160px 40px 80px;
 }
 
 .introduction {
@@ -146,7 +145,7 @@
 
 @media (min-width: 1200px) and (min-height: 600px) and (prefers-reduced-motion: no-preference) {
   .viewport {
-    block-size: 100svh;
+    block-size: calc(100svh - 2 * var(--section-padding-block));
   }
 
   .track {
@@ -155,7 +154,6 @@
     gap: 0;
     inline-size: max-content;
     block-size: 100%;
-    padding: 0 240px 0 160px;
   }
 
   .introduction {
@@ -189,7 +187,7 @@
 
   .imageLink {
     flex-shrink: 0;
-    inline-size: 100svh;
+    inline-size: calc(100svh - 2 * var(--section-padding-block));
     block-size: 100%;
     aspect-ratio: 1;
   }
@@ -216,7 +214,6 @@
 @media (max-width: $mobileBreakpoint) {
   .track {
     gap: 56px;
-    padding: 140px 20px 64px;
   }
 
   .title {
