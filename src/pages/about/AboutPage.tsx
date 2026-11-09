@@ -18,7 +18,11 @@ export function AboutPage() {
           Bringing design and development together to create expressive, intuitive
           digital experiences. Care in every interaction, purpose in every detail.
         </p>
-        <Link className={`textLink ${styles.aboutPageLink}`} to={routePaths.contact}>
+        <Link
+          className={`textLink ${styles.aboutPageLink}`}
+          to={routePaths.contact}
+          viewTransition
+        >
           Let’s talk <span aria-hidden="true">↗</span>
         </Link>
       </Container>

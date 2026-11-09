@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import type { RefObject } from 'react'
-import { NavLink } from 'react-router'
+import { NavLink, useLocation } from 'react-router'
 import { routePaths } from '../../../router/routePaths'
 import { Container } from '../../../../components/ui/Container'
 import { HeaderBrand } from './HeaderBrand'
@@ -23,6 +23,7 @@ type HeaderProps = {
 }
 
 export function Header({ headerReference, variant = 'compact' }: HeaderProps) {
+  const { pathname } = useLocation()
   const isHeaderExpanded = variant === 'expanded'
   const containerReference = useRef<HTMLDivElement>(null)
   const navigationReference = useRef<HTMLElement>(null)
@@ -64,7 +65,11 @@ export function Header({ headerReference, variant = 'compact' }: HeaderProps) {
           <ul className={styles.siteHeaderLinks}>
             {navigationItems.map((navigationItem) => (
               <li key={navigationItem.path}>
-                <NavLink to={navigationItem.path} className="textLink">
+                <NavLink
+                  to={navigationItem.path}
+                  className="textLink"
+                  viewTransition={navigationItem.path !== pathname}
+                >
                   {navigationItem.label}
                 </NavLink>
               </li>

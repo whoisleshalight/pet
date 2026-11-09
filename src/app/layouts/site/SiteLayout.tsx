@@ -2,7 +2,6 @@ import styles from "./SiteLayout.module.scss";
 import { useEffect, useRef } from "react";
 import {
     Outlet,
-    ScrollRestoration,
     useLocation,
     useMatches,
 } from "react-router";
@@ -13,6 +12,8 @@ import { Header } from "./header";
 import { Footer } from "./footer/Footer.tsx";
 import type { HeaderVariant } from "./header";
 import { SmoothScroll } from "./scroll";
+import { RouteScrollRestoration } from "./scroll/RouteScrollRestoration";
+import { usePageTransition } from "./transitions/usePageTransition";
 
 export function SiteLayout() {
     const location = useLocation();
@@ -20,7 +21,6 @@ export function SiteLayout() {
     const headerReference = useRef<HTMLElement>(null);
     const scrollContentReference = useRef<HTMLDivElement>(null);
     const mainContentReference = useRef<HTMLElement>(null);
-    const previousPathnameReference = useRef(location.pathname);
     const currentPage = matches.at(-1)?.handle as
         | {
               title?: string;
@@ -30,16 +30,11 @@ export function SiteLayout() {
     const pageTitle = currentPage?.title ?? "Portfolio";
     const headerVariant = currentPage?.headerVariant ?? "compact";
 
+    usePageTransition(mainContentReference);
+
     useEffect(() => {
         document.title = `${pageTitle} — ${portfolio.firstName} ${portfolio.lastName}`;
     }, [pageTitle]);
-
-    useEffect(() => {
-        if (previousPathnameReference.current !== location.pathname) {
-            mainContentReference.current?.focus({ preventScroll: true });
-            previousPathnameReference.current = location.pathname;
-        }
-    }, [location.pathname]);
 
     return (
         <>
@@ -69,7 +64,7 @@ export function SiteLayout() {
                 navigationKey={location.key}
                 controlsId="scroll-content"
             />
-            <ScrollRestoration />
+            <RouteScrollRestoration navigationKey={location.key} />
             <CursorFollower />
         </>
     );

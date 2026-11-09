@@ -46,6 +46,7 @@ export function ProjectGallery() {
                   aria-labelledby={titleId}
                 >
                   <Link
+                    viewTransition
                     className={styles.imageLink}
                     data-cursor-label="View"
                     to={projectPath}

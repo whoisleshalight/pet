@@ -44,18 +44,9 @@ export function useSmoothScroll(
   }, { scope: wrapperReference })
 
   useGSAP(
-    (_context, contextSafe) => {
-      if (!contextSafe) return
-
+    () => {
       // Update the page height before ScrollRestoration restores a saved position.
       ScrollTrigger.refresh()
-
-      // Apply that position immediately after the router has restored it.
-      const refreshFrame = requestAnimationFrame(contextSafe(() => {
-        ScrollSmoother.get()?.scrollTo(window.scrollY, false)
-      }))
-
-      return () => cancelAnimationFrame(refreshFrame)
     },
     {
       scope: wrapperReference,

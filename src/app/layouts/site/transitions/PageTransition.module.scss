@@ -1,0 +1,49 @@
+// These browser-owned pseudo-elements represent the complete route snapshots.
+:global(::view-transition-group(root)) {
+  animation-duration: 800ms;
+}
+
+:global(::view-transition-old(root)) {
+  animation: dimPreviousPage 800ms cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+
+:global(::view-transition-new(root)) {
+  animation: revealNextPage 800ms cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+
+:global(::view-transition-image-pair(root)) {
+  isolation: isolate;
+}
+
+:global(::view-transition-old(root)),
+:global(::view-transition-new(root)) {
+  mix-blend-mode: normal;
+}
+
+@keyframes dimPreviousPage {
+  from {
+    filter: brightness(1);
+  }
+
+  to {
+    filter: brightness(0.25);
+  }
+}
+
+@keyframes revealNextPage {
+  from {
+    clip-path: inset(100% 0 0);
+  }
+
+  to {
+    clip-path: inset(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :global(::view-transition-group(root)),
+  :global(::view-transition-old(root)),
+  :global(::view-transition-new(root)) {
+    animation: none;
+  }
+}

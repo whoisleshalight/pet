@@ -35,6 +35,7 @@ export function ErrorScreen({
             className={styles.errorScreenHomeLink}
             to={routePaths.home}
             reloadDocument={reloadDocument}
+            viewTransition={!reloadDocument}
           >
             Back to Home
           </Link>

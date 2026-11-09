@@ -13,6 +13,7 @@ export function StudioNoteCard({ note }: StudioNoteCardProps) {
       <Link
         className={styles.noteLink}
         to={`${routePaths.news}/${note.id}`}
+        viewTransition
       >
         <div className={styles.imageFrame} data-cursor-label="Read">
           <img

@@ -75,6 +75,7 @@ export function Footer() {
                   <li key={navigationLink.path}>
                     <NavLink
                       to={navigationLink.path}
+                      viewTransition={navigationLink.path !== pathname}
                       className={styles.footerLink}
                       end={navigationLink.path === routePaths.home}
                       onClick={

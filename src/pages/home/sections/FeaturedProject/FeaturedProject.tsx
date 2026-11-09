@@ -56,6 +56,7 @@ export function FeaturedProject() {
         </div>
 
         <Link
+          viewTransition
           ref={cardReference}
           className={styles.projectCard}
           data-cursor-label="View"

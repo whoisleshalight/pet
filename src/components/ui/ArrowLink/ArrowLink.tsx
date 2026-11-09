@@ -45,7 +45,7 @@ export function ArrowLink({
   )
 
   return (
-    <Link {...linkProps} className={linkClassName}>
+    <Link viewTransition {...linkProps} className={linkClassName}>
       {arrowPosition === 'start' && arrow}
       <span>{children}</span>
       {arrowPosition === 'end' && arrow}

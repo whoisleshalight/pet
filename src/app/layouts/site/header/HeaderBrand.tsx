@@ -39,6 +39,7 @@ export function HeaderBrand({ isExpanded, textReference }: HeaderBrandProps) {
       ref={brandReference}
       className={`${styles.siteHeaderBrand}${isExpanded ? ` ${styles.siteHeaderBrandExpanded}` : ''}`}
       to={routePaths.home}
+      viewTransition={pathname !== routePaths.home}
       onClick={handleHomeClick}
       aria-label="Home"
     >
