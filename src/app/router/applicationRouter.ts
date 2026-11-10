@@ -27,7 +27,7 @@ export const applicationRouter = createBrowserRouter([
       },
       {
         path: routePaths.news,
-        handle: { title: 'News' },
+        handle: { title: 'News', isFullscreen: true },
         lazy: async () => {
           const { NewsPage } = await import('../../pages/news/NewsPage')
           return { Component: NewsPage }

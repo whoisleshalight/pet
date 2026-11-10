@@ -1,3 +1,5 @@
+import { NewsFeed } from './sections/NewsFeed/NewsFeed'
+
 export function NewsPage() {
-  return null
+  return <NewsFeed />
 }

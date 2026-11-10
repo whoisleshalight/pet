@@ -1,5 +1,5 @@
-import logicOfEmotionImage from './assets/logic-of-emotion.webp'
-import precisionOverPerfectionImage from './assets/precision-over-perfection.webp'
+import logicOfEmotionImage from '../../../../features/news/assets/logic-of-emotion.webp'
+import precisionOverPerfectionImage from '../../../../features/news/assets/precision-over-perfection.webp'
 
 export interface StudioNote {
   id: string

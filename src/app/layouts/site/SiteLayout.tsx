@@ -1,11 +1,12 @@
 import styles from "./SiteLayout.module.scss";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
 import {
     Outlet,
     useLocation,
     useMatches,
 } from "react-router";
 import { portfolio } from "../../../config/portfolio";
+import { newsFeedMotionQuery } from "../../../features/news/newsFeedSettings";
 import { Scrollbar } from "../../../components/scrollbar";
 import { CursorFollower } from "../../../components/common/CursorFollower/CursorFollower";
 import { Header } from "./header";
@@ -14,6 +15,17 @@ import type { HeaderVariant } from "./header";
 import { SmoothScroll } from "./scroll";
 import { RouteScrollRestoration } from "./scroll/RouteScrollRestoration";
 import { usePageTransition } from "./transitions/usePageTransition";
+
+function subscribeToFullscreenViewport(onChange: () => void) {
+    const mediaQuery = window.matchMedia(newsFeedMotionQuery);
+    mediaQuery.addEventListener("change", onChange);
+
+    return () => mediaQuery.removeEventListener("change", onChange);
+}
+
+function getFullscreenViewportSnapshot() {
+    return window.matchMedia(newsFeedMotionQuery).matches;
+}
 
 export function SiteLayout() {
     const location = useLocation();
@@ -25,10 +37,17 @@ export function SiteLayout() {
         | {
               title?: string;
               headerVariant?: HeaderVariant;
+              isFullscreen?: boolean;
           }
         | undefined;
     const pageTitle = currentPage?.title ?? "Portfolio";
     const headerVariant = currentPage?.headerVariant ?? "compact";
+    const isFullscreenPage = currentPage?.isFullscreen ?? false;
+    const isFullscreenViewport = useSyncExternalStore(
+        subscribeToFullscreenViewport,
+        getFullscreenViewportSnapshot,
+    );
+    const shouldShowFooter = !isFullscreenPage || !isFullscreenViewport;
 
     usePageTransition(mainContentReference);
 
@@ -56,14 +75,16 @@ export function SiteLayout() {
                     >
                         <Outlet />
                     </main>
-                    <Footer />
+                    {shouldShowFooter && <Footer />}
                 </div>
             </SmoothScroll>
-            <Scrollbar
-                contentReference={scrollContentReference}
-                navigationKey={location.key}
-                controlsId="scroll-content"
-            />
+            {!isFullscreenPage && (
+                <Scrollbar
+                    contentReference={scrollContentReference}
+                    navigationKey={location.key}
+                    controlsId="scroll-content"
+                />
+            )}
             <RouteScrollRestoration navigationKey={location.key} />
             <CursorFollower />
         </>

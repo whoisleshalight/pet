@@ -1,0 +1,93 @@
+@use '../../styles/variables' as *;
+
+.article {
+  padding: 160px 80px 100px;
+}
+
+.introduction {
+  max-inline-size: 980px;
+  margin-inline: auto;
+  margin-block-end: 80px;
+}
+
+.backLink {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.date {
+  display: block;
+  margin-block: 64px 20px;
+  color: #757575;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.title {
+  max-inline-size: 1000px;
+  margin-block-end: 32px;
+  font-size: clamp(48px, 7vw, 104px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.055em;
+  overflow-wrap: anywhere;
+}
+
+.description {
+  max-inline-size: 600px;
+  color: #555;
+  font-size: clamp(20px, 2vw, 26px);
+  line-height: 1.5;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(40px, 7vw, 120px);
+  max-inline-size: 1200px;
+  margin-inline: auto;
+}
+
+.image {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  background: #e6e4df;
+}
+
+.body {
+  display: grid;
+  gap: 32px;
+  font-size: 20px;
+  line-height: 1.7;
+}
+
+@media (max-width: $tabletBreakpoint) {
+  .article {
+    padding-inline: 40px;
+  }
+
+  .content {
+    grid-template-columns: minmax(0, 1fr);
+    max-inline-size: 680px;
+  }
+}
+
+@media (max-width: $mobileBreakpoint) {
+  .article {
+    padding: 40px 20px 80px;
+  }
+
+  .introduction {
+    margin-block-end: 48px;
+  }
+
+  .date {
+    margin-block-start: 40px;
+  }
+
+  .body {
+    font-size: 18px;
+  }
+}

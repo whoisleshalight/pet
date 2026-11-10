@@ -17,7 +17,7 @@ export function ContactDetails() {
   return (
     <Section ref={sectionReference}>
 		  <Container>
-			  <h1 className={styles.title}>Contacts</h1>
+			  <h1 className={styles.title}>Let's Connect</h1>
         <div className={styles.scene}>
           <div className={styles.imageFrame}>
             <img
