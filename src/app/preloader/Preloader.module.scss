@@ -1,0 +1,43 @@
+@use '../../styles/variables' as *;
+
+.preloader {
+	position: fixed;
+	inset: 0;
+	z-index: 1000;
+	// cursor: wait;
+	touch-action: none;
+}
+
+.shade {
+	position: absolute;
+	inset: 0;
+	background: rgba($colorInk, 1);
+}
+
+.panel {
+	position: absolute;
+	inset: 0;
+	display: grid;
+	place-items: center;
+	color: $colorInk;
+	background: $colorPaper;
+	clip-path: inset(0% 0% 0% 0%);
+}
+
+.meter {
+	width: max-content;
+	max-width: calc(100% - 40px);
+}
+
+.counter {
+	display: flex;
+	justify-content: center;
+	align-items: baseline;
+	gap: 0.1em;
+	// font-size: clamp(96px, 15vw, 180px);
+	font-size: 32px;
+	font-weight: 600;
+	line-height: 1;
+	// letter-spacing: -0.06em;
+	font-variant-numeric: tabular-nums;
+}
