@@ -9,6 +9,7 @@ import { portfolio } from "../../../config/portfolio";
 import { newsFeedMotionQuery } from "../../../features/news/newsFeedSettings";
 import { Scrollbar } from "../../../components/scrollbar";
 import { CursorFollower } from "../../../components/common/CursorFollower/CursorFollower";
+import { LocalClock } from "../../../components/common/LocalClock";
 import { Header } from "./header";
 import { Footer } from "./footer/Footer.tsx";
 import type { HeaderVariant } from "./header";
@@ -87,6 +88,7 @@ export function SiteLayout() {
             )}
             <RouteScrollRestoration navigationKey={location.key} />
             <CursorFollower />
+            <LocalClock className={styles.localClock} />
         </>
     );
 }
