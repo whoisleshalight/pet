@@ -33,13 +33,14 @@ export function useFooterAnimation(
 
           gsap.to(blinds, {
             scaleY: 0,
-            duration: 0.9,
-            stagger: 0.08,
-            ease: 'power3.inOut',
+            // duration: 0.9,
+            stagger: 0.2,
+            ease: 'none',
             scrollTrigger: {
               trigger: brand,
-              start: 'top 92%',
-              once: true,
+              start: 'top bottom',
+              end: 'bottom bottom-=30%',
+              scrub: 1,
             },
           })
         },

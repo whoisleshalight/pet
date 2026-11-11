@@ -1,4 +1,5 @@
 ﻿import type { RefObject } from 'react'
+import { useBlocker } from 'react-router'
 import { gsap, useGSAP, ScrollTrigger } from '../../../../lib/animation'
 import { getCursorAppearance } from '../cursorAppearance'
 import type { CursorAppearance } from '../cursorAppearance'
@@ -8,12 +9,19 @@ const pointerListenerOptions = { capture: true, passive: true }
 export function useCursorFollower(
   cursorReference: RefObject<HTMLDivElement | null>,
   labelReference: RefObject<HTMLSpanElement | null>,
+  isTransitioning: boolean,
 ) {
+  const navigationBlocker = useBlocker(({ currentLocation, nextLocation }) => {
+    return currentLocation.pathname !== nextLocation.pathname &&
+      cursorReference.current?.hasAttribute('data-visible') === true
+  })
+  const isDeparting = navigationBlocker.state !== 'unblocked'
+
   useGSAP(() => {
     const cursor = cursorReference.current
     const label = labelReference.current
 
-    if (!cursor || !label) {
+    if (!cursor || !label || isTransitioning) {
       return
     }
 
@@ -55,7 +63,7 @@ export function useCursorFollower(
         const updateHoveredElement = () => {
           hoverFrame = 0
 
-          if (!isPointerActive) {
+          if (!isPointerActive || cursor.hasAttribute('data-departing')) {
             return
           }
 
@@ -84,10 +92,13 @@ export function useCursorFollower(
           moveCursorX.tween.pause()
           moveCursorY.tween.pause()
           applyAppearance({ mode: 'hidden' })
-          cursor.removeAttribute('data-pressed')
         }
 
         const updatePointerPosition = (event: PointerEvent) => {
+          if (cursor.hasAttribute('data-departing')) {
+            return
+          }
+
           if (event.pointerType !== 'mouse') {
             deactivatePointer()
             return
@@ -122,14 +133,7 @@ export function useCursorFollower(
             moveCursorY(pointerY)
           }
 
-          cursor.toggleAttribute('data-pressed', (event.buttons & 1) !== 0)
           scheduleHoverUpdate()
-        }
-
-        const handlePointerUp = (event: PointerEvent) => {
-          if (event.pointerType === 'mouse') {
-            cursor.toggleAttribute('data-pressed', (event.buttons & 1) !== 0)
-          }
         }
 
         const handlePointerOut = (event: PointerEvent) => {
@@ -150,7 +154,6 @@ export function useCursorFollower(
         // Capture keeps component event handlers from interrupting the follower.
         document.addEventListener('pointermove', updatePointerPosition, pointerListenerOptions)
         document.addEventListener('pointerdown', updatePointerPosition, pointerListenerOptions)
-        document.addEventListener('pointerup', handlePointerUp, pointerListenerOptions)
         document.addEventListener('pointerover', scheduleHoverUpdate, true)
         document.addEventListener('pointerout', handlePointerOut, true)
         document.addEventListener('pointercancel', deactivatePointer, true)
@@ -165,7 +168,6 @@ export function useCursorFollower(
         return () => {
           document.removeEventListener('pointermove', updatePointerPosition, true)
           document.removeEventListener('pointerdown', updatePointerPosition, true)
-          document.removeEventListener('pointerup', handlePointerUp, true)
           document.removeEventListener('pointerover', scheduleHoverUpdate, true)
           document.removeEventListener('pointerout', handlePointerOut, true)
           document.removeEventListener('pointercancel', deactivatePointer, true)
@@ -182,5 +184,41 @@ export function useCursorFollower(
     )
 
     return () => mediaQueries.revert()
-  }, { scope: cursorReference })
+  }, {
+    scope: cursorReference,
+    dependencies: [isTransitioning],
+    revertOnUpdate: true,
+  })
+
+  useGSAP(() => {
+    const cursor = cursorReference.current
+
+    if (!cursor) {
+      return
+    }
+
+    if (navigationBlocker.state === 'unblocked') {
+      gsap.set(cursor, { scale: 1 })
+      return
+    }
+
+    if (navigationBlocker.state === 'proceeding') {
+      // Keep the cursor collapsed while the next route loads and takes snapshots.
+      gsap.set(cursor, { scale: 0 })
+      return
+    }
+
+    gsap.to(cursor, {
+      scale: 0,
+      duration: 0.2,
+      ease: 'power2.in',
+      onComplete: navigationBlocker.proceed,
+    })
+  }, {
+    scope: cursorReference,
+    dependencies: [navigationBlocker],
+    revertOnUpdate: true,
+  })
+
+  return isDeparting
 }

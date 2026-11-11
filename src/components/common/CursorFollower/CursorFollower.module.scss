@@ -17,6 +17,12 @@
 	opacity: 1;
 }
 
+.cursorFollower[data-transitioning] {
+	// Hide before either route snapshot; opacity would still capture the fade.
+	visibility: hidden;
+	// opacity: 0;
+}
+
 .cursorFollower[data-mode='link'] {
 	--cursor-scale: 0.5;
 }
@@ -39,10 +45,6 @@
 
 .cursorFollower[data-mode='label'] .circle {
 	background: rgb(0 0 0 / 55%);
-}
-
-.cursorFollower[data-pressed] .circle {
-	transform: translate(-50%, -50%) scale(calc(var(--cursor-scale) * 0.85));
 }
 
 .label {
