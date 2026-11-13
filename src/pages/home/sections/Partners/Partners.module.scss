@@ -60,6 +60,11 @@
 	object-fit: contain;
 }
 
+.logoFrame {
+	display: grid;
+	place-items: center;
+}
+
 .imageFrame {
 	position: relative;
 	z-index: 2;

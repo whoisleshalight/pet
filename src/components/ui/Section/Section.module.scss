@@ -7,5 +7,6 @@
 	min-inline-size: 0;
 	color: $colorInk;
 	background: $colorPaper;
-	padding-block: var(--section-padding-block);
+	padding-top: var(--section-padding-block);
+	padding-bottom: var(--section-padding-block);
 }

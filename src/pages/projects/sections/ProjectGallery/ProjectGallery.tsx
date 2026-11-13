@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import { routePaths } from '../../../../app/router/routePaths'
 import { ArrowLink } from '../../../../components/ui/ArrowLink'
 import { Container } from '../../../../components/ui/Container'
+import { Image } from '../../../../components/ui/Image'
 import { Section } from '../../../../components/ui/Section'
 import { useProjectGalleryScroll } from './hooks/useProjectGalleryScroll'
 import { projectItems } from './projectItems'
@@ -52,7 +53,8 @@ export function ProjectGallery() {
                     to={projectPath}
                     aria-label={`View ${project.title} case study`}
                   >
-                    <img
+                    <Image
+                      fill
                       className={styles.projectImage}
                       src={project.image}
                       srcSet={`${project.image} 768w, ${project.imageLarge} 1536w`}
@@ -60,7 +62,7 @@ export function ProjectGallery() {
                       width={1536}
                       height={1536}
                       alt={project.imageAlt}
-                      loading={projectIndex === 0 ? 'eager' : 'lazy'}
+                      priority={projectIndex === 0}
                       decoding="async"
                     />
                   </Link>

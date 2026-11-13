@@ -1,218 +1,190 @@
 @use '../../../../styles/variables' as *;
 
 .newsFeed {
-  --news-gap: 40px;
-  --news-padding: 40px;
+	--news-gap: 40px;
+	--news-padding: 40px;
 
-  position: relative;
-  padding: 140px var(--news-padding) 100px;
-  color: $colorInk;
-  background: $colorPaper;
-}
-
-.introduction {
-  max-inline-size: 720px;
-  margin-block-end: 80px;
-}
-
-.title {
-  margin-block-end: 24px;
-  font-size: clamp(56px, 7vw, 104px);
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: -0.055em;
-}
-
-.introductionText {
-  max-inline-size: 440px;
-  color: #666;
-  font-size: 16px;
-  line-height: 1.6;
+	position: relative;
+	padding: 140px var(--news-padding) 100px;
+	color: $colorInk;
+	background: $colorPaper;
 }
 
 .gallery {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  align-items: start;
-  column-gap: var(--news-gap);
-  row-gap: 100px;
+	position: relative;
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	align-items: start;
+	column-gap: var(--news-gap);
+	row-gap: 100px;
 }
 
 .card {
-  min-inline-size: 0;
+	min-inline-size: 0;
 }
 
 .cardLink {
-  display: block;
+	display: block;
 
-  &:focus-visible {
-    outline: 2px solid currentColor;
-    outline-offset: 6px;
-  }
+	&:focus-visible {
+		outline: 2px solid currentColor;
+		outline-offset: 6px;
+	}
 }
 
 .imageFrame {
-  position: relative;
-  overflow: hidden;
-  background: #e6e4df;
+	position: relative;
+	overflow: hidden;
+	background: #e6e4df;
 }
 
 .image {
-  display: block;
-  inline-size: 100%;
-  block-size: auto;
-  transition: transform 650ms cubic-bezier(0.2, 0.65, 0.3, 1);
+	display: block;
+	inline-size: 100%;
+	block-size: auto;
+	transition: transform 650ms cubic-bezier(0.2, 0.65, 0.3, 1);
 }
 
 .imageArrow {
-  position: absolute;
-  inset-block-start: 20px;
-  inset-inline-end: 20px;
-  inline-size: 44px;
-  block-size: 44px;
-  padding: 12px;
-  border-radius: 50%;
-  color: $colorInk;
-  background: $colorPaper;
-  opacity: 0;
-  transform: translateY(6px);
-  transition: opacity 200ms ease, transform 200ms ease;
+	position: absolute;
+	inset-block-start: 20px;
+	inset-inline-end: 20px;
+	inline-size: 44px;
+	block-size: 44px;
+	padding: 12px;
+	border-radius: 50%;
+	color: $colorInk;
+	background: $colorPaper;
+	opacity: 0;
+	transform: translateY(6px);
+	transition: opacity 200ms ease, transform 200ms ease;
 }
 
 .cardText {
-  display: grid;
-  gap: 12px;
-  padding-block-start: 40px;
+	display: grid;
+	gap: 12px;
+	padding-top: 40px;
 }
 
 .date {
-  margin-block-end: 4px;
-  color: #757575;
-  font-size: 14px;
-  line-height: 1.6;
+	margin-block-end: 4px;
+	color: #757575;
+	font-size: 14px;
+	line-height: 1.6;
 }
 
 .cardTitle {
-  font-size: clamp(24px, 1.8vw, 32px);
-  font-weight: 700;
-  line-height: 1.25;
-  letter-spacing: -0.025em;
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-decoration-color: transparent;
-  text-underline-offset: 5px;
-  transition: text-decoration-color 200ms ease;
+	font-size: clamp(24px, 1.8vw, 32px);
+	font-weight: 700;
+	line-height: 1.25;
+	letter-spacing: -0.025em;
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-decoration-color: transparent;
+	text-underline-offset: 5px;
+	transition: text-decoration-color 200ms ease;
 }
 
 .description {
-  max-inline-size: 440px;
-  color: #414141;
-  font-size: 16px;
-  line-height: 1.6;
+	max-inline-size: 440px;
+	color: #414141;
+	font-size: 16px;
+	line-height: 1.6;
 }
 
 .cardLink:focus-visible {
-  .imageArrow {
-    opacity: 1;
-    transform: none;
-  }
+	.imageArrow {
+		opacity: 1;
+		transform: none;
+	}
 
-  .cardTitle {
-    text-decoration-color: currentColor;
-  }
+	.cardTitle {
+		text-decoration-color: currentColor;
+	}
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .cardLink:hover {
-    .image {
-      transform: scale(1.025);
-    }
+	.cardLink:hover {
+		.image {
+			transform: scale(1.025);
+		}
 
-    .imageArrow {
-      opacity: 1;
-      transform: none;
-    }
+		.imageArrow {
+			opacity: 1;
+			transform: none;
+		}
 
-    .cardTitle {
-      text-decoration-color: currentColor;
-    }
-  }
+		.cardTitle {
+			text-decoration-color: currentColor;
+		}
+	}
 }
 
 @media (min-width: 1200px) and (min-height: 600px) and (prefers-reduced-motion: no-preference) {
-  .newsFeed {
-    block-size: 100svh;
-    min-block-size: 600px;
-    overflow: clip;
-    padding-block: 0;
+	.newsFeed {
+		block-size: 100svh;
+		min-block-size: 600px;
+		overflow: clip;
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+
+	.gallery {
+		display: block;
+		block-size: 100%;
+		overflow: clip;
+	}
+
+	.card {
+		position: absolute;
+		inset-block-start: 0;
+		inline-size: calc((100% - 2 * var(--news-gap)) / 3);
+		padding-bottom: 120px;
+
+		&[data-news-column='1'] {
+			inset-inline-start: calc((100% + var(--news-gap)) / 3);
+		}
+
+		&[data-news-column='2'] {
+			inset-inline-start: calc(2 * (100% + var(--news-gap)) / 3);
+		}
+	}
+
+	.imageFrame,
+	.image {
+		max-block-size: calc(100svh - 360px);
   }
 
-  .introduction {
-    position: absolute;
-    inline-size: 1px;
-    block-size: 1px;
-    margin: -1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
-  }
-
-  .gallery {
-    display: block;
-    block-size: 100%;
-    overflow: clip;
-  }
-
-  .card {
-    position: absolute;
-    inset-block-start: 0;
-    inline-size: calc((100% - 2 * var(--news-gap)) / 3);
-    padding-block-end: 120px;
-
-    &[data-news-column='1'] {
-      inset-inline-start: calc((100% + var(--news-gap)) / 3);
-    }
-
-    &[data-news-column='2'] {
-      inset-inline-start: calc(2 * (100% + var(--news-gap)) / 3);
-    }
-  }
-
-  .image {
-    max-block-size: calc(100svh - 360px);
-    object-fit: cover;
-  }
+	.image {
+		object-fit: cover;
+	}
 }
 
 @media (max-width: 1199px) {
-  .gallery {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    row-gap: 72px;
-  }
+	.gallery {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		row-gap: 72px;
+	}
 }
 
 @media (max-width: $mobileBreakpoint) {
-  .newsFeed {
-    --news-padding: 20px;
+	.newsFeed {
+		--news-padding: 20px;
 
-    padding-block: 40px 80px;
-  }
+		padding-top: 40px;
+		padding-bottom: 80px;
+	}
 
-  .introduction {
-    margin-block-end: 48px;
-  }
+	.gallery {
+		grid-template-columns: minmax(0, 1fr);
+		row-gap: 64px;
+	}
 
-  .gallery {
-    grid-template-columns: minmax(0, 1fr);
-    row-gap: 64px;
-  }
+	.cardText {
+		padding-top: 24px;
+	}
 
-  .cardText {
-    padding-block-start: 24px;
-  }
-
-  .cardTitle {
-    font-size: 28px;
-  }
+	.cardTitle {
+		font-size: 28px;
+	}
 }

@@ -28,7 +28,9 @@ function isInViewport(element: Element): boolean {
 }
 
 export function getInitialPageResources(signal: AbortSignal): Promise<unknown>[] {
-  const images = Array.from(document.images).filter(isInViewport)
+  const images = Array.from(document.images).filter((image) => {
+    return image.hasAttribute('src') && isInViewport(image)
+  })
   const videos = Array.from(document.querySelectorAll('video[poster]'))
     .filter(isInViewport)
   const posterImages = videos.map((video) => {

@@ -1,0 +1,84 @@
+.frame {
+  position: relative;
+  display: block;
+  inline-size: 100%;
+  max-block-size: inherit;
+  isolation: isolate;
+  background: #dedede;
+}
+
+.fill {
+  block-size: 100%;
+}
+
+.frame[data-image-state='loaded']:has(> .image) {
+  background: transparent;
+}
+
+.image[data-image-state='loading'],
+.image[data-image-state='error'] {
+  visibility: hidden;
+}
+
+.image[data-image-state='loaded'] {
+  animation: revealImage 300ms ease-out;
+}
+
+.loader {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.frame[data-image-state='loaded']:has(> .image) > .loader,
+.frame[data-image-state='error'] > .loader {
+  display: none;
+}
+
+.spinner {
+  inline-size: 32px;
+  block-size: 32px;
+  border: 3px solid rgb(0 0 0 / 15%);
+  border-block-start-color: #555;
+  border-radius: 50%;
+  animation: spin 800ms linear infinite;
+}
+
+.errorMessage {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  color: #454545;
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: center;
+  pointer-events: none;
+}
+
+@keyframes revealImage {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image[data-image-state='loaded'],
+  .spinner {
+    animation: none;
+  }
+}

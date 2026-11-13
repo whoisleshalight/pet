@@ -15,7 +15,8 @@
 	grid-template-areas: 'brand navigation';
 	align-items: start;
 	column-gap: $pageGutter;
-	padding-block: $pageMargin;
+	padding-top: $pageMargin;
+	padding-bottom: $pageMargin;
 }
 
 .siteHeader a {

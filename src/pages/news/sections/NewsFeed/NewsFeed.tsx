@@ -1,6 +1,7 @@
 import { useId, useRef } from 'react'
 import { Link } from 'react-router'
 import { routePaths } from '../../../../app/router/routePaths'
+import { Image } from '../../../../components/ui/Image'
 import { newsItems } from '../../../../features/news/newsItems'
 import { useNewsFeedAnimation } from './hooks/useNewsFeedAnimation'
 import styles from './NewsFeed.module.scss'
@@ -21,14 +22,7 @@ export function NewsFeed() {
       className={styles.newsFeed}
       aria-labelledby={headingId}
     >
-      <div className={styles.introduction}>
-        <h1 id={headingId} className={styles.title}>
-          Studio Notes
-        </h1>
-        <p className={styles.introductionText}>
-          Ideas, observations, and notes from our practice in design and digital craft.
-        </p>
-      </div>
+
 
       <div ref={galleryReference} className={styles.gallery}>
         {newsItems.map((newsItem, itemIndex) => {
@@ -44,13 +38,13 @@ export function NewsFeed() {
                 viewTransition
               >
                 <div className={styles.imageFrame} data-cursor-label="Read">
-                  <img
+                  <Image
                     className={styles.image}
                     src={newsItem.image}
                     width={newsItem.imageWidth}
                     height={newsItem.imageHeight}
                     alt={newsItem.imageAlt}
-                    loading={itemIndex < 3 ? 'eager' : 'lazy'}
+                    priority={itemIndex < 3}
                     decoding="async"
                     style={{ objectPosition: newsItem.imagePosition }}
                   />

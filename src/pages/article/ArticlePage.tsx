@@ -1,6 +1,7 @@
 import { useParams } from 'react-router'
 import { routePaths } from '../../app/router/routePaths'
 import { ArrowLink } from '../../components/ui/ArrowLink'
+import { Image } from '../../components/ui/Image'
 import { newsItems } from '../../features/news/newsItems'
 import { NotFoundPage } from '../not-found/NotFoundPage'
 import styles from './ArticlePage.module.scss'
@@ -27,12 +28,13 @@ export function ArticlePage() {
       </header>
 
       <div className={styles.content}>
-        <img
+        <Image
           className={styles.image}
           src={article.image}
           width={article.imageWidth}
           height={article.imageHeight}
           alt={article.imageAlt}
+          priority
           style={{ objectPosition: article.imagePosition }}
         />
         <div className={styles.body}>

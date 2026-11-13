@@ -1,5 +1,6 @@
 import { Link } from 'react-router'
 import { routePaths } from '../../../../../../app/router/routePaths'
+import { Image } from '../../../../../../components/ui/Image'
 import type { StudioNote } from '../../studioNoteItems'
 import styles from './StudioNoteCard.module.scss'
 
@@ -16,13 +17,13 @@ export function StudioNoteCard({ note }: StudioNoteCardProps) {
         viewTransition
       >
         <div className={styles.imageFrame} data-cursor-label="Read">
-          <img
+          <Image
+            fill
             className={styles.noteImage}
             src={note.image}
             width={771}
             height={1024}
             alt={note.imageAlt}
-            loading="lazy"
             decoding="async"
             style={{ objectPosition: note.imagePosition }}
           />

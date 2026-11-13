@@ -1,8 +1,9 @@
 @use '../../../../styles/variables' as *;
 
-.footer {
+footer.footer {
 	color: #000;
 	background: #fff;
+	padding-bottom: 40px;
 }
 
 .footerContainer {
@@ -25,7 +26,8 @@
 
 .brandText {
 	grid-area: 1 / 1;
-	padding-block: 0.05em;
+	padding-top: 0.05em;
+	padding-bottom: 0.05em;
 	font-size: 11cqw;
 	font-weight: 700;
 	line-height: 70%;

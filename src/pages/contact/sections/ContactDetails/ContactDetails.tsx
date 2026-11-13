@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import { Container } from '../../../../components/ui/Container'
+import { Image } from '../../../../components/ui/Image'
 import { Section } from '../../../../components/ui/Section'
 import { portfolio } from '../../../../config/portfolio'
 import { useContactDetailsAnimation } from './hooks/useContactDetailsAnimation'
@@ -19,20 +20,20 @@ export function ContactDetails() {
 		  <Container>
 			  <h1 className={styles.title}>Let's Connect</h1>
         <div className={styles.scene}>
-          <div className={styles.imageFrame}>
-            <img
-              ref={imageReference}
-              className={styles.image}
-              src={studioExteriorLarge}
-              srcSet={`${studioExteriorSmall} 960w, ${studioExteriorLarge} 1920w`}
-              sizes="calc(100vw - 160px)"
-              width={1920}
-              height={1446}
-              alt="Sunlit studio building with tall windows, trees, and cyclists passing by."
-              fetchPriority="high"
-              decoding="async"
-            />
-          </div>
+          <Image
+            frameClassName={styles.imageFrame}
+            ref={imageReference}
+            className={styles.image}
+            src={studioExteriorLarge}
+            srcSet={`${studioExteriorSmall} 960w, ${studioExteriorLarge} 1920w`}
+            sizes="calc(100vw - 160px)"
+            width={1920}
+            height={1446}
+            alt="Sunlit studio building with tall windows, trees, and cyclists passing by."
+            fetchPriority="high"
+            priority
+            decoding="async"
+          />
 
           <div ref={cardReference} className={styles.contactCard}>
             <dl className={styles.contactList}>

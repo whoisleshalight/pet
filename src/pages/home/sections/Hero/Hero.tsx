@@ -1,4 +1,5 @@
-import { useRef } from 'react'
+import { useContext, useRef } from 'react'
+import { DeferredResourcesContext } from '../../../../app/preloader/DeferredResourcesContext'
 import { Container } from '../../../../components/ui/Container'
 import { Section } from '../../../../components/ui/Section'
 import { useHeroAnimation } from './hooks/useHeroAnimation'
@@ -10,6 +11,7 @@ import styles from './Hero.module.scss'
 export function Hero() {
   const heroReference = useRef<HTMLElement>(null)
   const backgroundVideoReference = useRef<HTMLVideoElement>(null)
+  const canLoadDeferredResources = useContext(DeferredResourcesContext)
 
   useHeroAnimation(heroReference)
   useHeroVideo(backgroundVideoReference)
@@ -30,10 +32,9 @@ export function Hero() {
           <video
             ref={backgroundVideoReference}
             className={styles.backgroundVideo}
-            src={showreel}
+            src={canLoadDeferredResources ? showreel : undefined}
             poster={showreelPoster}
-            preload="metadata"
-            autoPlay
+            preload={canLoadDeferredResources ? 'auto' : 'none'}
             muted
             loop
             playsInline

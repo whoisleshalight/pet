@@ -2,6 +2,7 @@ import { useId, useRef } from 'react'
 import { Link } from 'react-router'
 import { routePaths } from '../../../../app/router/routePaths'
 import { Container } from '../../../../components/ui/Container'
+import { Image } from '../../../../components/ui/Image'
 import { Section } from '../../../../components/ui/Section'
 import { useFeaturedProjectParallax } from './hooks/useFeaturedProjectParallax'
 import projectImage from './assets/B4jxrHJqCYeKMdfyNVrqx2Gp4.avif'
@@ -64,7 +65,8 @@ export function FeaturedProject() {
           aria-label="Golden Hour — view project"
         >
           <div ref={mediaReference} className={styles.projectMedia}>
-            <img
+            <Image
+              fill
               className={styles.projectImage}
               src={projectImage}
               srcSet={`${projectImage} 768w, ${projectImageLarge} 1536w`}

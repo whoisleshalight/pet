@@ -1,6 +1,7 @@
 import { useId, useRef } from 'react'
 import type { CSSProperties } from 'react'
 import { Container } from '../../../../components/ui/Container'
+import { Image } from '../../../../components/ui/Image'
 import { Section } from '../../../../components/ui/Section'
 import { usePartnersAnimation } from './hooks/usePartnersAnimation'
 import { partners } from './partnerData'
@@ -48,11 +49,12 @@ export function Partners() {
                     style={logoStyle}
                   >
                     <div className={styles.logoViewport}>
-                      <img
+                      <Image
+                        fill
+                        frameClassName={styles.logoFrame}
                         className={styles.logo}
                         src={partner.image}
                         alt={partner.name}
-                        loading="lazy"
                         decoding="async"
                       />
                     </div>
@@ -64,7 +66,8 @@ export function Partners() {
         </div>
 
         <figure className={styles.imageFrame}>
-          <img
+          <Image
+            fill
             className={styles.teamImage}
             src={teamImage}
             srcSet={`${teamImageSmall} 960w, ${teamImage} 1920w`}
@@ -72,7 +75,6 @@ export function Partners() {
             width={1920}
             height={1446}
             alt="A team discussing a project together in a sunlit studio."
-            loading="lazy"
             decoding="async"
           />
         </figure>

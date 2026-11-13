@@ -16,7 +16,8 @@ export function useHeroVideo(
     let isDisposed = false
 
     function shouldPlayVideo() {
-      return isVisible && !document.hidden && !reducedMotion.matches
+      return video?.hasAttribute('src') &&
+        isVisible && !document.hidden && !reducedMotion.matches
     }
 
     function synchronizePlayback() {
@@ -67,6 +68,7 @@ export function useHeroVideo(
     })
 
     observer.observe(video)
+    video.addEventListener('loadeddata', synchronizePlayback)
     video.addEventListener('play', synchronizePlayback)
     document.addEventListener('visibilitychange', synchronizePlayback)
     reducedMotion.addEventListener('change', synchronizePlayback)
@@ -75,6 +77,7 @@ export function useHeroVideo(
     return () => {
       isDisposed = true
       observer.disconnect()
+      video.removeEventListener('loadeddata', synchronizePlayback)
       video.removeEventListener('play', synchronizePlayback)
       document.removeEventListener('visibilitychange', synchronizePlayback)
       reducedMotion.removeEventListener('change', synchronizePlayback)
