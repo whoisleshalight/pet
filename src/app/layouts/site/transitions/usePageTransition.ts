@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react'
 import type { RefObject } from 'react'
 import { useLocation, useViewTransitionState } from 'react-router'
 import { ScrollSmoother, useGSAP } from '../../../../lib/animation'
-import './PageTransition.module.scss'
 
 const scrollKeys = new Set([
   'ArrowUp',

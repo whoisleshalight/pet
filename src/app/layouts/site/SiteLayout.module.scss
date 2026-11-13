@@ -1,4 +1,7 @@
 @use '../../../styles/variables' as *;
+// Include browser snapshot styles through the layout's used CSS Module so Vite
+// preserves them when tree-shaking the production build.
+@use './transitions/PageTransition.module';
 
 .siteMain {
 	--site-header-height: 0px;
