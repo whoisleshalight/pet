@@ -24,8 +24,8 @@ export function Preloader({ isPageReady, onComplete }: PreloaderProps) {
     }
   }, [])
 
-  useGSAP((_context, contextSafe) => {
-    if (!isPageReady || !contextSafe) {
+  useGSAP(() => {
+    if (!isPageReady) {
       return
     }
 
@@ -39,7 +39,6 @@ export function Preloader({ isPageReady, onComplete }: PreloaderProps) {
     const scrollSmoother = ScrollSmoother.get()
     const wasScrollPaused = scrollSmoother?.paused() ?? false
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const progress = { value: 0 }
     const resources = getInitialPageResources(abortController.signal)
     const totalResources = resources.length + 1
     let settledResources = 1
@@ -47,59 +46,31 @@ export function Preloader({ isPageReady, onComplete }: PreloaderProps) {
     scrollSmoother?.paused(true)
 
     const updateProgress = () => {
-      const percentage = Math.round(progress.value)
+      const percentage = Math.round(settledResources / totalResources * 100)
       counter.textContent = String(percentage)
       preloader.setAttribute('aria-valuenow', String(percentage))
     }
 
     const revealPage = gsap.timeline({ paused: true, onComplete })
     revealPage
-      // Keep the completed counter fully visible before starting its exit.
-      .addLabel('hideCounter', reducedMotion.matches ? 0 : 0.3)
+      .addLabel('revealPage')
       .to(meterReference.current, {
         y: () => reducedMotion.matches ? 0 : -24,
         opacity: 0,
         duration: () => reducedMotion.matches ? 0 : 0.4,
-      }, 'hideCounter')
+      }, 'revealPage')
       .to(panelReference.current, {
         clipPath: 'inset(0% 0% 100% 0%)',
         duration: () => reducedMotion.matches ? 0 : 0.8,
         ease: 'power4.inOut',
-      })
+      }, 'revealPage')
       .to(shadeReference.current, {
         opacity: 0,
         duration: () => reducedMotion.matches ? 0 : 0.8,
         ease: 'power2.out',
       }, '<')
 
-    // Animate toward actual readiness, keeping the counter visible on cached loads.
-    // Resource promises settle outside useGSAP, so their tweens need contextSafe.
-    const animateProgress = contextSafe(() => {
-      const percentage = settledResources / totalResources * 100
-      const isComplete = settledResources === totalResources
-      let duration = 0
-
-      if (!reducedMotion.matches) {
-        duration = isComplete ? 1.2 : 0.4
-      }
-
-      gsap.to(progress, {
-        value: percentage,
-        duration,
-        ease: 'power1.inOut',
-        overwrite: true,
-        onUpdate: updateProgress,
-        onComplete: () => {
-          if (isComplete) {
-            progress.value = 100
-            updateProgress()
-            revealPage.play(0)
-          }
-        },
-      })
-    })
-
-    animateProgress()
+    updateProgress()
 
     resources.forEach((resource) => {
       const handleSettledResource = () => {
@@ -108,7 +79,11 @@ export function Preloader({ isPageReady, onComplete }: PreloaderProps) {
         }
 
         settledResources += 1
-        animateProgress()
+        updateProgress()
+
+        if (settledResources === totalResources) {
+          revealPage.play(0)
+        }
       }
 
       void resource.then(handleSettledResource, handleSettledResource)
